@@ -1,0 +1,276 @@
+{
+  "schema": 1,
+  "purpose": "Check declared task routing and source permission gates; not an NLP classifier or filesystem lock.",
+  "cases": [
+    {
+      "id": "read-only-analysis",
+      "task": "Analyze the project without writing source.",
+      "route": "assignment-audit",
+      "expectedSkills": [
+        "pacman-assignment-audit"
+      ],
+      "expectedRules": [
+        "assignment",
+        "grading",
+        "testing",
+        "git-ai-usage"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "implement-without-authorization",
+      "task": "Plan DFS changes while the user permits instruction files only.",
+      "route": "search-implementation",
+      "expectedSkills": [
+        "pacman-search-implementation"
+      ],
+      "expectedRules": [
+        "assignment",
+        "search-algorithms",
+        "testing",
+        "grading",
+        "git-ai-usage"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "authorized-q1-q7",
+      "task": "Implement Q1-Q7 after an explicit user implementation request.",
+      "route": "search-implementation",
+      "expectedSkills": [
+        "pacman-search-implementation"
+      ],
+      "expectedRules": [
+        "assignment",
+        "search-algorithms",
+        "testing",
+        "grading",
+        "git-ai-usage"
+      ],
+      "sourceAuthorized": true,
+      "sourcePaths": [
+        "src/search.py",
+        "src/searchAgents.py"
+      ],
+      "expectedSourceEditPermitted": true
+    },
+    {
+      "id": "protected-util",
+      "task": "Fix a supplied util helper during assignment work.",
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "sourcePaths": [
+        "src/util.py"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "protected-grader",
+      "task": "Change Q6 marks and its solution threshold to match the PDF.",
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "sourcePaths": [
+        "src/test_cases/q6/CONFIG",
+        "src/test_cases/q6/medium_corners.solution"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "verification-only",
+      "task": "Run Q7 and report actual expansion count without fixes.",
+      "route": "search-verification",
+      "expectedSkills": [
+        "pacman-search-verification"
+      ],
+      "expectedRules": [
+        "testing",
+        "search-algorithms",
+        "grading"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [
+        "src/searchAgents.py"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "report-and-zip",
+      "task": "Prepare the requested report and two-file ZIP using actual group details.",
+      "route": "report-submission",
+      "expectedSkills": [
+        "pacman-report-submission"
+      ],
+      "expectedRules": [
+        "assignment",
+        "report-submission",
+        "grading",
+        "git-ai-usage"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "resource-refinement",
+      "task": "Use BLUEVERSE read-only to refine Pac-Man agent resources.",
+      "route": "agent-resources",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "cross-project-protection",
+      "task": "An implementation task attempts to write the BLUEVERSE reference.",
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "sourcePaths": [
+        "D:/WKS/Projects/BLUEVERSE/.agents/routing.md"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "path-traversal",
+      "task": "Attempt to escape the source allowlist through a relative path.",
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "sourcePaths": [
+        "src/../README.md"
+      ],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "id": "contribution-review",
+      "task": "Review Git participation and exact AI prompt requirements.",
+      "route": "git-collaboration",
+      "expectedSkills": [],
+      "expectedRules": [
+        "git-ai-usage",
+        "report-submission"
+      ],
+      "sourceAuthorized": false,
+      "sourcePaths": [],
+      "expectedSourceEditPermitted": false
+    },
+    {
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "expectedSourceEditPermitted": false,
+      "id": "reject-create-allowed-file",
+      "task": "Attempt to create an allowlisted source file despite content-edit authorization.",
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "sourceOperation": "create"
+    },
+    {
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "expectedSourceEditPermitted": false,
+      "id": "reject-delete-allowed-file",
+      "task": "Attempt to delete an allowlisted source file despite content-edit authorization.",
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "sourceOperation": "delete"
+    },
+    {
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "expectedSourceEditPermitted": false,
+      "id": "reject-rename-allowed-file",
+      "task": "Attempt to rename an allowlisted source file despite content-edit authorization.",
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "sourceOperation": "rename"
+    },
+    {
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "expectedSourceEditPermitted": false,
+      "id": "reject-move-allowed-file",
+      "task": "Attempt to move an allowlisted source file despite content-edit authorization.",
+      "sourcePaths": [
+        "src/search.py"
+      ],
+      "sourceOperation": "move"
+    },
+    {
+      "route": "protected-framework",
+      "expectedSkills": [],
+      "expectedRules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "sourceAuthorized": true,
+      "expectedSourceEditPermitted": false,
+      "id": "reject-new-nested-source",
+      "task": "Add a new helper inside a nested src directory.",
+      "sourcePaths": [
+        "src/helpers/new_helper.py"
+      ],
+      "sourceOperation": "create"
+    }
+  ]
+}

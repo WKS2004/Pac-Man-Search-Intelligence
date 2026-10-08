@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "policy": {
+    "projectRulesWin": true,
+    "sourceImplementationRequiresUserAuthorization": true,
+    "sourceEditAllowlist": [
+      "src/search.py",
+      "src/searchAgents.py"
+    ],
+    "referenceProjectsAreReadOnly": true,
+    "sourceEditExistingFilesOnly": true,
+    "srcFileCreationDeletionRenameForbidden": true,
+    "unauthorizedAgentChangesMustBeRejectedAndRestored": true,
+    "recoveryMustPreserveUserChanges": true
+  },
+  "universalRules": [
+    "change-safety",
+    "validation"
+  ],
+  "skills": [
+    {
+      "id": "pacman-assignment-audit",
+      "status": "project",
+      "localPath": ".agents/skills/pacman-assignment-audit",
+      "route": "assignment-audit"
+    },
+    {
+      "id": "pacman-search-implementation",
+      "status": "project",
+      "localPath": ".agents/skills/pacman-search-implementation",
+      "route": "search-implementation"
+    },
+    {
+      "id": "pacman-search-verification",
+      "status": "project",
+      "localPath": ".agents/skills/pacman-search-verification",
+      "route": "search-verification"
+    },
+    {
+      "id": "pacman-report-submission",
+      "status": "project",
+      "localPath": ".agents/skills/pacman-report-submission",
+      "route": "report-submission"
+    }
+  ],
+  "routes": [
+    {
+      "id": "assignment-audit",
+      "rules": [
+        "assignment",
+        "grading",
+        "testing",
+        "git-ai-usage"
+      ],
+      "skills": [
+        "pacman-assignment-audit"
+      ]
+    },
+    {
+      "id": "search-implementation",
+      "rules": [
+        "assignment",
+        "search-algorithms",
+        "testing",
+        "grading",
+        "git-ai-usage"
+      ],
+      "skills": [
+        "pacman-search-implementation"
+      ]
+    },
+    {
+      "id": "search-verification",
+      "rules": [
+        "testing",
+        "search-algorithms",
+        "grading"
+      ],
+      "skills": [
+        "pacman-search-verification"
+      ]
+    },
+    {
+      "id": "report-submission",
+      "rules": [
+        "assignment",
+        "report-submission",
+        "grading",
+        "git-ai-usage"
+      ],
+      "skills": [
+        "pacman-report-submission"
+      ]
+    },
+    {
+      "id": "git-collaboration",
+      "rules": [
+        "git-ai-usage",
+        "report-submission"
+      ],
+      "skills": []
+    },
+    {
+      "id": "agent-resources",
+      "rules": [
+        "assignment"
+      ],
+      "skills": []
+    },
+    {
+      "id": "protected-framework",
+      "rules": [
+        "assignment",
+        "testing",
+        "grading"
+      ],
+      "skills": []
+    }
+  ]
+}
