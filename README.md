@@ -159,7 +159,7 @@ python -B .agents/scripts/validate_agent_resources.py
 ```
 
 For diagnostic artifacts, workflow policy tests and CI helper checks, see the
-[GitHub automation guide](.github/README.md). Keep all generated reports, caches,
+[GitHub automation guide](.github/AUTOMATION.md). Keep all generated reports, caches,
 recordings and other outputs outside `src/`.
 
 ## Source boundaries
@@ -206,7 +206,7 @@ to close; preventing direct pushes requires GitHub branch protection.
 
 These workflows depend on GitHub Actions permissions. Fork branch deletion and
 protected branch deletion have platform limits. See the
-[automation guide](.github/README.md) for enforcement details and required-check
+[automation guide](.github/AUTOMATION.md) for enforcement details and required-check
 configuration. Manual grading jobs should not be required PR checks.
 
 ## Contribution and submission

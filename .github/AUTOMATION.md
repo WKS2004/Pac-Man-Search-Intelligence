@@ -3,9 +3,13 @@
 This folder separates workflows, CI helpers and policies, with behavior specific
 to the Pac-Man assignment.
 
+This guide is named `AUTOMATION.md` because GitHub prioritizes a README in
+`.github/` over the repository's root README. Keep the project overview and logo
+in the root [README.md](../README.md).
+
 ```text
 .github/
-  README.md
+  AUTOMATION.md
   policies/
     source-policy.json
   scripts/
