@@ -1,4 +1,9 @@
-# Pac-Man Search Intelligence — License
+# Pac-Man Search Intelligence — Apache License 2.0
+
+> [!NOTE]
+> **Apache License, Version 2.0 (`Apache-2.0`)** applies to the team's original contributions.
+> [Read the full Apache 2.0 license below](#apache-license-version-20).
+> Supplied UC Berkeley and other third-party material retains its existing terms.
 
 | Project detail | Value |
 | --- | --- |
@@ -72,7 +77,13 @@ respective terms. Their inclusion or use does not grant the team ownership or
 additional sublicensing rights. This repository contains material under
 different terms; it is not offered in its entirety under Apache 2.0.
 
+---
+
 ## Apache License, Version 2.0
+
+> [!NOTE]
+> **Full Apache 2.0 license text**
+> The standard terms begin below and include Sections 1–9 and the appendix.
 
 The standard terms below are preserved. The appendix's example copyright line
 has been filled with this project's year and contributor designation. The scope
