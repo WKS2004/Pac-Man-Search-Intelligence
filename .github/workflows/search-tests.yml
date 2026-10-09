@@ -1,0 +1,51 @@
+name: Pac-Man Search Tests
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: search-tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  search:
+    name: Q1-Q7 / Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.9', '3.10', '3.11']
+    steps:
+      - name: Checkout supplied source and tests
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up assignment Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Verify supplied source and test integrity
+        run: python -B .github/scripts/check_source_boundary.py
+      - name: Grade Q1-Q7 and verify source recovery
+        env:
+          RESULTS_DIRECTORY: ${{ runner.temp }}/pacman-results
+        run: python -B .github/scripts/run_search_checks.py --results-dir "$RESULTS_DIRECTORY"
+      - name: Upload question scores and diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pacman-q1-q7-python-${{ matrix.python }}
+          path: ${{ runner.temp }}/pacman-results
+          if-no-files-found: ignore
+          retention-days: 7

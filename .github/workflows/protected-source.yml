@@ -1,0 +1,97 @@
+name: Protected Source Policy
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+
+permissions: {}
+
+concurrency:
+  group: protected-source-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  protected-source:
+    name: Reject protected source changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      # Never check out or execute PR code in this privileged workflow.
+      - name: Inspect source objects and close violating PRs
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            // Keep this trusted baseline aligned with policies/source-policy.json.
+            // Do not load policy or scripts from the PR being checked.
+            const baseline = '2d55c6abd10639f54376cf31b705f8b533c41033';
+            const editable = new Set(['src/search.py', 'src/searchAgents.py']);
+            const parameters = { ...context.repo, pull_number: context.payload.pull_request.number };
+
+            async function sourceTree(commitSha) {
+              const { data: commit } = await github.rest.git.getCommit({
+                ...context.repo, commit_sha: commitSha
+              });
+              const { data: root } = await github.rest.git.getTree({
+                ...context.repo, tree_sha: commit.tree.sha
+              });
+              if (root.truncated) throw new Error('Incomplete repository tree; inspection refused.');
+              const src = root.tree.find(entry => entry.path === 'src');
+              const entries = new Map();
+              if (!src) return entries;
+              entries.set('src', src);
+              if (src.type !== 'tree' || src.mode !== '040000') return entries;
+              const { data: source } = await github.rest.git.getTree({
+                ...context.repo, tree_sha: src.sha, recursive: '1'
+              });
+              if (source.truncated) throw new Error('Incomplete source tree; inspection refused.');
+              for (const entry of source.tree) entries.set(`src/${entry.path}`, entry);
+              return entries;
+            }
+
+            try {
+              const { data: pr } = await github.rest.pulls.get(parameters);
+              if (pr.state !== 'open' || pr.base.ref !== 'main') {
+                core.info('PR is closed or no longer targets main; no action needed.');
+                return;
+              }
+              const expected = await sourceTree(baseline);
+              for (const file of editable) {
+                const entry = expected.get(file);
+                if (!entry || entry.type !== 'blob' || !['100644', '100755'].includes(entry.mode)) {
+                  throw new Error('The trusted baseline is missing an existing regular editable file.');
+                }
+              }
+              const actual = await sourceTree(pr.head.sha);
+              const violations = [];
+              for (const file of new Set([...expected.keys(), ...actual.keys()])) {
+                const before = expected.get(file), after = actual.get(file);
+                if (!before || !after) {
+                  violations.push(`${file}: source addition, deletion or rename`);
+                } else if (before.type !== after.type || before.mode !== after.mode) {
+                  violations.push(`${file}: source type or permission change`);
+                } else if (before.type !== 'tree' && before.sha !== after.sha && !editable.has(file)) {
+                  violations.push(`${file}: protected content changed`);
+                }
+              }
+              // Re-fetch immediately before any mutation so stale events do not close
+              // a corrected, retargeted or already closed PR.
+              const { data: current } = await github.rest.pulls.get(parameters);
+              if (current.state !== 'open' || current.base.ref !== 'main' ||
+                  current.head.sha !== pr.head.sha || current.base.sha !== pr.base.sha) {
+                core.setFailed('PR changed during inspection; a new PR event must check its latest state.');
+                return;
+              }
+              if (violations.length === 0) {
+                core.info('Source boundary accepted: only the two existing editable files may differ.');
+                return;
+              }
+              for (const violation of violations) core.warning(JSON.stringify(violation));
+              await github.rest.pulls.update({ ...parameters, state: 'closed' });
+              core.setFailed(`Automatically closed PR #${parameters.pull_number}: ${violations.length} source boundary violation(s).`);
+            } catch (error) {
+              core.setFailed(`Source policy could not finish: ${error.message}`);
+            }

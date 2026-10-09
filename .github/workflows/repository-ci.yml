@@ -1,0 +1,72 @@
+name: Repository Checks
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  repository:
+    name: Repository and source boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Enforce the assignment source boundary
+        run: python -B .github/scripts/check_source_boundary.py
+      - name: Validate agent resources
+        run: python -B .agents/scripts/validate_agent_resources.py
+      - name: Test source recovery
+        run: python -B .agents/evals/test_source_guard.py
+      - name: Test CI helpers
+        run: python -B -m unittest discover -s .github/scripts/tests -p 'test_*.py'
+      - name: Test workflow policies with mocked GitHub APIs
+        run: node --test .github/scripts/tests/*.test.cjs
+      - name: Check whitespace
+        shell: bash
+        run: |
+          baseline="$(python -B -c 'import json; print(json.load(open(".github/policies/source-policy.json"))["baselineCommit"])')"
+          git diff --check "$baseline" HEAD
+
+  workflow-lint:
+    name: GitHub workflow validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout workflow files
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Validate workflows with checksum-verified actionlint
+        env:
+          ACTIONLINT_VERSION: '1.7.12'
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/actionlint.tar.gz"
+          curl --fail --silent --show-error --location \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" \
+            --output "$archive"
+          echo "$ACTIONLINT_SHA256  $archive" | sha256sum --check
+          tar -xzf "$archive" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" -color -shellcheck= -pyflakes=

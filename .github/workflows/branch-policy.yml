@@ -1,0 +1,80 @@
+name: Branch Name Policy
+
+on:
+  create:
+  push:
+    branches: ['**']
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  lowercase-branches:
+    name: Enforce lowercase branch names
+    if: github.event_name != 'create' || github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      # This privileged job never checks out or executes repository/PR code.
+      - name: Delete branches containing uppercase characters
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const repository = `${context.repo.owner}/${context.repo.repo}`;
+            let branches = [];
+            let canDelete = true;
+
+            if (context.eventName === 'create') {
+              if (context.payload.ref_type !== 'branch') return;
+              branches = [context.payload.ref];
+            } else if (context.eventName === 'push') {
+              if (context.payload.deleted) return;
+              const ref = context.payload.ref;
+              if (typeof ref !== 'string' || !ref.startsWith('refs/heads/')) return;
+              branches = [ref.slice('refs/heads/'.length)];
+            } else if (context.eventName === 'pull_request_target') {
+              const head = context.payload.pull_request?.head;
+              branches = [head?.ref];
+              canDelete = head?.repo?.full_name?.toLowerCase() === repository.toLowerCase();
+            } else if (context.eventName === 'workflow_dispatch') {
+              const existing = await github.paginate(github.rest.repos.listBranches, {
+                ...context.repo, per_page: 100
+              });
+              branches = existing.map(branch => branch.name);
+            } else {
+              core.setFailed('Unsupported branch-policy event.');
+              return;
+            }
+
+            for (const branch of new Set(branches)) {
+              if (typeof branch !== 'string' || branch.length === 0) {
+                core.setFailed('The event does not identify a valid branch name.');
+                continue;
+              }
+              if (branch === branch.toLowerCase()) {
+                core.info(`Accepted lowercase branch ${JSON.stringify(branch)}.`);
+                continue;
+              }
+
+              core.setFailed(`Rejected ${JSON.stringify(branch)}: branch names must be lowercase.`);
+              if (!canDelete) {
+                core.warning('The invalid branch belongs to a fork; this repository token cannot delete it. Its owner must remove it.');
+                continue;
+              }
+              try {
+                await github.rest.git.deleteRef({
+                  ...context.repo, ref: `heads/${branch}`
+                });
+                core.warning(`Deleted invalid branch ${JSON.stringify(branch)}; it was not renamed.`);
+              } catch (error) {
+                if (error.status === 404) {
+                  core.info('The invalid branch is already absent, possibly deleted by another policy run.');
+                } else {
+                  core.setFailed(`GitHub refused deletion of ${JSON.stringify(branch)} (HTTP ${error.status ?? 'unknown'}): ${error.message}`);
+                }
+              }
+            }
