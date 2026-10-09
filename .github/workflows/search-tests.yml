@@ -1,16 +1,14 @@
 name: Pac-Man Search Tests
 
 on:
-  push:
-    branches: ['**']
-  pull_request:
+  # Full-score grading is opt-in while the assignment is being implemented.
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: search-tests-${{ github.event.pull_request.number || github.ref }}
+  group: search-tests-${{ github.ref }}
   cancel-in-progress: true
 
 env:

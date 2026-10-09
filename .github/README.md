@@ -29,7 +29,7 @@ to the Pac-Man assignment.
 | Branch Name Policy | Branch creation, branch pushes, PR updates, manual audit | Reject uppercase names and delete invalid branches in this repository |
 | Protected Source Policy | PRs opened, reopened, updated or retargeted to `main` | Automatically close PRs that violate the assignment source boundary |
 | Repository Checks | All branch pushes, PRs, manual runs | Validate source boundaries, Python syntax, agent resources, recovery and CI helpers; lint workflow YAML |
-| Pac-Man Search Tests | All branch pushes, PRs, manual runs | Grade Q1-Q7 on Python 3.9, 3.10 and 3.11; publish score summaries and diagnostic artifacts |
+| Pac-Man Search Tests | Manual runs only | Grade Q1-Q7 on Python 3.9, 3.10 and 3.11; publish score summaries and diagnostic artifacts |
 
 CI uses read-only tokens and disables persisted checkout credentials. The
 branch-policy job receives `contents: write`; the protected-source job receives
@@ -37,8 +37,9 @@ branch-policy job receives `contents: write`; the protected-source job receives
 or executes repository/PR code. Actions are pinned to verified release commits. The
 actionlint archive is versioned and checked against its release SHA-256.
 
-All branches and PR targets are covered; there are no path filters that leave
-required checks pending after documentation or automation-only changes.
+Automatic repository checks cover all branches and PR targets; there are no path
+filters that leave those checks pending after documentation or automation-only
+changes. Assignment grading runs only when requested manually.
 
 ## Lowercase branch policy
 
@@ -104,10 +105,19 @@ never advance the baseline to conceal a protected-source modification. CI checks
 are not server-side branch protection or an operating-system permission lock.
 Configure required checks in GitHub settings if merge enforcement is desired.
 Suggested check names are `Enforce lowercase branch names`, `Repository and
-source boundaries`, `GitHub workflow validation`, and all three `Q1-Q7 / Python`
-checks. This implementation does not change remote settings.
+source boundaries`, `GitHub workflow validation`, and `Reject protected source
+changes` for `main`. Do not require the manual `Q1-Q7 / Python` jobs as PR checks:
+they do not run automatically. This implementation does not change remote settings.
 
 ## Search grading
+
+Pac-Man Search Tests is one workflow with three matrix jobs, one for each Python
+version. It is manual-only while the assignment is being implemented, so routine
+pushes and PRs do not produce expected full-score failures from unfinished work.
+Run it from GitHub's **Actions > Pac-Man Search Tests > Run workflow**, selecting
+the branch to grade. The workflow must exist on the default branch for manual
+dispatch. Existing failed runs remain historical records; this change does not
+erase them. Automatic branch, source-boundary and repository checks remain active.
 
 Each question runs the unchanged supplied autograder from `src/` with `-B` and
 `--no-graphics`. Scores must reach the positive maximum specified by its supplied
@@ -117,7 +127,10 @@ Q8 is excluded. Local grader points differ from the PDF marks.
 
 No additional Python packages are needed for these headless tests. The matrix
 checks the PDF's Python range; it does not verify Conda setup or graphical play.
-Unimplemented/partially implemented questions intentionally fail the test checks.
+Unimplemented/partially implemented questions intentionally fail manual grading.
+Failures are not hidden with `continue-on-error`, and grading requirements are
+not lowered. Re-enable automatic grading explicitly when the implementation is
+ready to use full marks as a merge requirement.
 
 The runner snapshots source before each question. Its isolated CI checkout
 permits attribution of grader side effects: unauthorized changes are rejected
