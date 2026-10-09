@@ -42,6 +42,7 @@ must satisfy the assignment's correctness and performance requirements.
 ```text
 Pac-Man-Search-Intelligence/
 ├── README.md                  # Project overview and usage
+├── LICENSE.md                 # Apache 2.0 terms, scope and contributor notices
 ├── AGENTS.md                  # Repository-wide agent instructions
 ├── assets/
 │   └── pacman-search-intelligence-logo.png
@@ -230,7 +231,17 @@ Consult the Project Guidelines PDF and the
 [report and submission guidance](.agents/rules/report-submission.md) for the full
 requirements. Preserve all original source notices when preparing submission files.
 
-## Attribution and educational use
+## License and attribution
+
+The team's original contributions are licensed under the **Apache License,
+Version 2.0**. See [LICENSE.md](LICENSE.md) for the standard terms, the four
+contributors of the 2026-AI-45 Group, patent permissions and third-party scope.
+Copyright and any patents remain with their respective owners; Apache 2.0
+grants the permissions specified by its terms without transferring ownership.
+
+The Apache grant applies only to original material the contributors are entitled
+to license. The supplied Berkeley framework and other third-party material keep
+their existing terms; the entire repository is not offered under Apache 2.0.
 
 The Pac-Man framework and autograder were developed at **UC Berkeley**. The
 supplied notices credit John DeNero and Dan Klein for the core projects and
@@ -243,4 +254,5 @@ retaining attribution and not distributing or publishing solutions. The local
 assignment's public-repository requirement conflicts with that publication
 restriction; obtain instructor clarification before publishing completed solutions.
 The Project Guidelines PDF governs this assignment's scope rather than another
-semester's CS188 project page. No additional project license is declared here.
+semester's CS188 project page. The Apache license for original contributions
+does not remove the restrictions on distributing the underlying Berkeley material.
