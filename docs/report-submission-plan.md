@@ -6,9 +6,10 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Q1 passes the supplied grader for 3/3 provisional
-points in Python 3.11 `cs188`; Q2–Q7 implementation and report evidence remain
-pending
+**Submission report status:** Q1 and Q2 each pass the supplied grader for 3/3
+provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied Q2
+output does not identify its interpreter. Q3–Q7 implementation remains pending,
+and report evidence for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -36,7 +37,7 @@ questions. The supplied PDF states no submission deadline.
 | Report section | Owner | Required function or block | Evidence still needed |
 | --- | --- | --- | --- |
 | Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; screenshot, explanation and actual contribution evidence are still needed |
-| Q2 | Ushan | `breadthFirstSearch` | Actual implementation, q2 screenshot and explanation |
+| Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q3 | Adithya | `uniformCostSearch` | Actual implementation, q3 screenshot and explanation |
 | Q4 | Sanuda | `aStarSearch` | Actual implementation, q4 screenshot and explanation |
 | Q5 | Ushan | `CornersProblem` start, goal and successor methods | Actual implementation, q5 screenshot and explanation |
@@ -56,11 +57,30 @@ implementation descriptions or present performance targets as achieved results.
 local points in the assignment-recommended Python 3.11 `cs188` environment:
 `graph_backtrack`, `graph_bfs_vs_dfs`, `graph_infinite`, `graph_manypaths` and
 `pacman_1`. On `mediumMaze`, the grader reported a 130-step solution and 146
-expanded nodes. The score is provisional and unregistered. An actual output
-screenshot and Q1 explanation are still needed for the report. This records
-repository code and test status only; it does not establish which member
-authored the implementation or complete that member's contribution evidence.
-Q2–Q7 remain unimplemented.
+expanded nodes.
+
+The supplied Q2 output for `python autograder.py -q q2` reports all five tests
+passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
+`graph_infinite`, `graph_manypaths` and `pacman_1`. On `mediumMaze`, it reports
+a 68-step solution and 269 expanded nodes. The output does not identify the
+Python interpreter. Both scores are provisional and unregistered.
+
+**Q2 explanation draft for owner review (under 200 words):** Breadth-first
+search places the start state and an empty action path in the supplied
+`util.Queue`. It removes entries in FIFO order, so paths are expanded in
+nondecreasing number of moves. When a goal state is removed, its action path is
+returned. The algorithm skips states already expanded, records each newly
+expanded state, and queues its unvisited successors with the corresponding
+action appended. When every move has equal cost, this ordering makes the first
+goal path a shortest path in number of moves. The implementation does not use
+`stepCost`, so it does not guarantee minimum total cost when move costs differ.
+If the queue empties before a goal is found, it returns an empty path.
+
+The Q1 output screenshot and explanation, the Q2 output screenshot and owner
+review of this draft, and genuine contribution evidence remain needed for the
+report. This records repository code and test status only; it does not establish
+which member authored either implementation or complete that member's
+contribution evidence. Q3–Q7 remain unimplemented.
 
 ## Verification and performance
 
@@ -115,9 +135,11 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Capture the actual Q1 autograder output screenshot and write its explanation.
-- [ ] Implement Q2-Q7 and verify legal paths and required optimality.
-- [ ] Run the supplied autograder for Q2-Q7 and record actual results.
+- [ ] Capture the actual Q1 and Q2 autograder output screenshots.
+- [ ] Write the Q1 explanation and have the Q2 owner review and finalize the
+  draft in Current implementation status.
+- [ ] Implement Q3-Q7 and verify legal paths and required optimality.
+- [ ] Run the supplied autograder for Q3-Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
 - [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
   nonnegativity; record expansion counts and runtime.

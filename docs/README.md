@@ -11,9 +11,9 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
-| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1 reports provisional 3/3 in Python 3.11 `cs188`; report evidence pending |
+| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1/Q2 local grader: provisional 3/3 each; Q2 explanation draft included, evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
-| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1 reports provisional 3/3 in Python 3.11 `cs188` |
+| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1/Q2 local grader: provisional 3/3 each; Q2 interpreter unspecified |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
 | [Agent instructions](../AGENTS.md) | Documentation scope, source boundaries and member-data restrictions | Applies to work throughout the repository |
 | [Automation guide](../.github/AUTOMATION.md) | Existing workflows and evidence collection behavior | References the confirmed responsibility plan |
@@ -27,10 +27,15 @@ Repository AI usage records have been removed and must not be created or updated
 The report plan still records the lecturer's disclosure requirement as an
 assignment requirement; it contains no usage log or prompt transcript.
 
-The current checkout's Q1 implementation in `src/search.py` passes all five
-supplied tests for 3/3 provisional points in the assignment-recommended Python
-3.11 `cs188` environment. Q2–Q7 remain unimplemented. The completed submission
-report and code ZIP still require a Q1 output screenshot, explanation, verified
-implementation and genuine contribution evidence. All artifacts remain
-outside `src/`; further source implementation requires its own explicit
-authorization.
+The current checkout's Q1 and Q2 implementations in `src/search.py` each pass
+all five supplied tests for 3/3 provisional points. Q2 uses `util.Queue` to
+expand shallowest paths first and finds a fewest-move path when all step costs
+are equal. Q1 was run in the
+assignment-recommended Python 3.11 `cs188` environment and returned a 130-step
+`mediumMaze` path with 146 expanded nodes. The supplied Q2 output reports a
+68-step path and 269 expanded nodes; it does not identify the interpreter. Both
+scores remain unregistered. Q3–Q7 remain unimplemented. The completed
+submission report and code ZIP still require Q1/Q2 output screenshots, the Q1
+explanation, owner review of the Q2 explanation draft, and genuine contribution
+evidence. All artifacts remain outside `src/`; further source implementation
+requires its own explicit authorization.
