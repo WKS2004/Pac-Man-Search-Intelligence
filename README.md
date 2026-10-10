@@ -9,20 +9,21 @@ heuristics to visiting all four corners and collecting food.
 
 **Development status:** Q1's `depthFirstSearch`, Q2's `breadthFirstSearch`,
 Q3's `uniformCostSearch`, and Q4's `aStarSearch` in `src/search.py`, plus Q5's
-`CornersProblem` and Q6's `cornersHeuristic` in `src/searchAgents.py`, pass their
-supplied tests for 3/3 local points each. Q1 was run in the
-assignment-recommended Python 3.11 `cs188` environment and returned a 130-step
-`mediumMaze` path with 146 expanded nodes. The supplied Q2 output reports a
-68-step path and 269 expanded nodes on `mediumMaze`; the supplied Q2–Q6 outputs
-do not identify their interpreters. Q3 reports `mediumMaze` paths of 68, 74 and
-152 steps with 269, 260 and 173 expanded nodes, and a 7-step `testSearch` path
-with 14 expanded nodes. Q4 reports a 68-step `mediumMaze` path with 221 expanded
-nodes. Q5 passes its `tinyCorner` test with a 28-step solution; its run also
-passes the five-test Q2 dependency. Q6 passes three heuristic sanity checks and
-reports a 106-step `mediumCorners` solution with 741 expanded nodes; its run
-also passes the six-test Q4 dependency. Q6's expansion count is within the PDF's
-1,200-node full-credit target. All six scores are provisional and unregistered.
-Q7's food heuristic remains to be implemented.
+`CornersProblem` and Q6's `cornersHeuristic` in `src/searchAgents.py` pass their
+supplied tests for 3/3 local points each. Q7's `foodHeuristic` reports 4/4
+provisional local points. Q1 was run in the assignment-recommended Python 3.11
+`cs188` environment and returned a 130-step `mediumMaze` path with 146 expanded
+nodes. The supplied Q2 output reports a 68-step path and 269 expanded nodes on
+`mediumMaze`; the supplied Q2–Q7 outputs do not identify their interpreters. Q3
+reports `mediumMaze` paths of 68, 74 and 152 steps with 269, 260 and 173 expanded
+nodes, and a 7-step `testSearch` path with 14 expanded nodes. Q4 reports a
+68-step `mediumMaze` path with 221 expanded nodes. Q5 passes its `tinyCorner`
+test with a 28-step solution and its five-test Q2 dependency. Q6 passes three
+heuristic sanity checks and reports a 106-step `mediumCorners` solution with 741
+expanded nodes; its run also passes the six-test Q4 dependency. Q7's 17 food
+heuristic checks pass; its `trickySearch` expansion result is 7,137 nodes, below
+the PDF's 9,000-node target but above the supplied grader's additional 7,000-node
+threshold. All seven question scores are provisional and unregistered.
 
 Q1's depth-first search uses the supplied LIFO `util.Stack` and stores each
 state with its action path. It pops the latest entry, returns its path at the
@@ -49,6 +50,11 @@ Q6's `cornersHeuristic` evaluates every order of the unvisited corners and
 returns the minimum Manhattan-distance tour. Manhattan distance ignores walls,
 so each leg is a lower bound on maze distance; minimizing over every order
 avoids an arbitrary greedy route.
+
+Q7's `foodHeuristic` adds the Manhattan distance to the nearest remaining dot
+to a Manhattan minimum spanning tree over all remaining dots. It caches the
+tree cost by food-position set. Since Manhattan distance ignores walls, these
+distances provide an admissible and consistent lower bound on the food tour.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
@@ -145,10 +151,11 @@ Keyboard control requires graphics; it cannot be combined with text-only play.
 ## Search examples
 
 Run these from `src/`. The supplied Q1–Q6 autograder outputs report provisional
-3/3 each. Q1 was run in Python 3.11 `cs188`; the Q2–Q6 outputs do not identify
-their interpreters. Q6 reports a 106-step `mediumCorners` solution and 741
-expanded nodes. Q7 still needs implementation; the Q6 command below corresponds
-to a passing supplied autograder result.
+3/3 each, and Q7 reports 4/4 provisional points. Q1 was run in Python 3.11
+`cs188`; the Q2–Q7 outputs do not identify their interpreters. Q6 reports a 106-step
+`mediumCorners` solution and 741 expanded nodes. Q7 reports 7,137 expanded
+nodes on `trickySearch`, meeting the PDF's 9,000-node target but missing the
+grader's additional 7,000-node threshold.
 
 ```sh
 # Q1: depth-first search
@@ -282,11 +289,12 @@ The allocation is finalized. Q1 and Q2 each pass all five supplied tests, Q3
 passes all ten, Q4 passes all six, Q5 passes with its Q2 dependency, and Q6
 passes with its Q4 dependency; each reports 3/3 provisional local points. Q5's
 `tinyCorner` solution is 28 steps. Q6's `mediumCorners` solution is 106 steps
-with 741 expanded nodes. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q6
-outputs do not identify their interpreters. Q7 implementation and genuine
-grading/contribution evidence remain pending. The report still needs Q1–Q6
-output screenshots, owner review of the Q1–Q6 explanation drafts, and genuine
-contribution evidence.
+with 741 expanded nodes. Q7 reports 4/4 provisional points; its 17 food
+heuristic checks pass, and its `trickySearch` expansion count is 7,137. This is
+within the PDF's 9,000-node target and above the grader's additional 7,000-node
+threshold. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q7 outputs do not
+identify their interpreters. Screenshots, owner review of the Q1–Q7 explanation
+drafts, and genuine contribution evidence remain outstanding for the report.
 The [document index](docs/README.md) identifies each document's purpose and status.
 Repository AI usage records are not created or maintained, as requested by the user.
 

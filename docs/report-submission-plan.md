@@ -6,10 +6,11 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Q1–Q6 each pass the supplied grader for 3/3
-provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied Q2–Q6
-outputs do not identify their interpreters. Q7 implementation remains pending,
-and report evidence for all question sections is incomplete.
+**Submission report status:** Q1–Q6 each report 3/3 and Q7 reports 4/4
+provisional points. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q7
+outputs do not identify their interpreters. Q7's `trickySearch` expansion count
+is 7,137, within the PDF's 9,000-node target and above the grader's additional
+7,000-node threshold. Report evidence for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -42,7 +43,7 @@ questions. The supplied PDF states no submission deadline.
 | Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q6 | Sanuda | `cornersHeuristic` | Supplied q6 output reports provisional 3/3; Q4 dependency also reports 3/3. `mediumCorners` path length 106, 741 expanded nodes (within the 1,200-node target). Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q7 | Wanshaja | `foodHeuristic` | Actual implementation, q7 screenshot, correctness argument and expansion count |
+| Q7 | Wanshaja | `foodHeuristic` | Supplied q7 output reports provisional 4/4; Q4 dependency also reports 3/3. All 17 heuristic checks pass. `trickySearch` expands 7,137 nodes: within the PDF's 9,000-node target but above the grader's additional 7,000-node threshold. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed. Interpreter not identified in the output |
 
 Each question section must identify the edited functions/code blocks, include a
 clear screenshot of actual autograder output and explain the logic, data
@@ -157,11 +158,31 @@ estimate consistent across a one-step move; when that move visits a corner,
 the step accounts for removing that corner from the remaining set. The value is
 nonnegative and is zero when all corners have been visited.
 
-The Q1–Q6 output screenshots, owner review of the Q1–Q6 explanation drafts, and
+The supplied output for `python autograder.py -q q7` runs dependency Q4 and Q7.
+All six Q4 tests pass for 3/3. All 17 Q7 food-heuristic checks pass. The
+`trickySearch` expansion check reports 7,137 nodes and displays `FAIL` because
+it exceeds the supplied grader's additional 7,000-node threshold. This remains
+below the PDF's 9,000-node full-credit target, and the overall Q7 score is 4/4.
+Both scores are provisional and unregistered. The output does not identify the
+Python interpreter.
+
+**Q7 explanation draft for owner review (under 200 words):** `foodHeuristic`
+returns zero when no food remains. Otherwise, it adds the Manhattan distance
+from Pac-Man to the nearest dot to a minimum spanning tree over all remaining
+dots, using Manhattan distances for the tree edges. The heuristic caches each
+tree cost by the sorted set of food positions. Any collection route must travel
+at least as far as its first dot, then connect all remaining food; that latter
+part costs at least the food MST. Manhattan distance ignores walls and cannot
+exceed maze distance, so the sum is an admissible lower bound. A move without
+eating food changes the nearest-distance term by at most one. If a move eats a
+dot, its one step reaches that dot, and the successor's nearest-food distance
+covers the cheapest edge connecting the dot to the reduced MST. This makes the
+estimate consistent. It is nonnegative and zero when no food remains.
+
+The Q1–Q7 output screenshots, owner review of the Q1–Q7 explanation drafts, and
 genuine contribution evidence remain needed for the report. This records
-repository code and test status only; it does not establish
-which member authored any implementation or complete that member's contribution
-evidence. Q7 remains unimplemented.
+repository code and test status only; it does not establish which member
+authored any implementation or complete that member's contribution evidence.
 
 ## Verification and performance
 
@@ -216,14 +237,12 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Capture the actual Q1, Q2, Q3, Q4, Q5 and Q6 autograder output screenshots.
-- [ ] Have the Q1–Q6 owners review and finalize their explanation drafts in
+- [ ] Capture the actual Q1, Q2, Q3, Q4, Q5, Q6 and Q7 autograder output screenshots.
+- [ ] Have the Q1–Q7 owners review and finalize their explanation drafts in
   Current implementation status.
-- [ ] Implement Q7 and verify legal paths and required optimality.
-- [ ] Run the supplied autograder for Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
-- [ ] Have the Q6 owner review its admissibility and consistency explanation;
-  verify Q7's heuristic properties and record Q6/Q7 runtime evidence.
+- [ ] Have the Q6/Q7 owners review their admissibility and consistency
+  explanations; record Q6/Q7 runtime evidence.
 - [ ] Capture actual results for all seven question sections.
 - [ ] Check word limits, formatting, screenshot clarity and identity consistency.
 - [ ] Reconcile final contributions with actual Git evidence.
