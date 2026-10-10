@@ -244,12 +244,11 @@ describes the available rules and skills.
 | [Branch Name Policy](.github/workflows/branch-policy.yml) | Branch creation, pushes, PR updates or manual audit | Reject uppercase branch names and attempt to delete invalid branches in this repository |
 | [Protected Source Policy](.github/workflows/protected-source.yml) | A PR targeting `main` is opened, reopened or updated | Automatically close PRs whose current source tree violates the source boundary |
 | [Repository Checks](.github/workflows/repository-ci.yml) | Pushes, PRs or manual runs | Check source integrity, syntax, agent resources, CI helpers and workflow definitions |
-| [Pac-Man Search Tests](.github/workflows/search-tests.yml) | Manual runs only | Grade Q1–Q7 on Python 3.9, 3.10 and 3.11 and upload diagnostic artifacts |
+| [Pac-Man Search Tests](.github/workflows/search-tests.yml) | All branch pushes, pull requests, manual runs | Grade Q1–Q7 on Python 3.9, 3.10 and 3.11 and upload diagnostic artifacts |
 
-Search grading is one workflow with three Python-version jobs. Run it through
-**Actions → Pac-Man Search Tests → Run workflow** and choose the branch to grade.
-Incomplete implementations still fail manual grading; routine pushes do not
-trigger it while the assignment is in progress.
+Search grading runs automatically on branch pushes and pull requests. It is one
+workflow with three Python-version jobs; manual runs remain available through
+**Actions → Pac-Man Search Tests → Run workflow**.
 
 Protected Source Policy compares the PR's current source tree with a fixed
 reviewed baseline. It rejects protected content edits, additions, deletions,
@@ -260,7 +259,8 @@ to close; preventing direct pushes requires GitHub branch protection.
 These workflows depend on GitHub Actions permissions. Fork branch deletion and
 protected branch deletion have platform limits. See the
 [automation guide](.github/AUTOMATION.md) for enforcement details and required-check
-configuration. Manual grading jobs should not be required PR checks.
+configuration. This workflow change does not alter GitHub's branch-protection or
+required-check settings.
 
 ## Contribution and submission
 
