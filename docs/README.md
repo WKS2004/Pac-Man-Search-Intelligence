@@ -11,9 +11,9 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
-| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1–Q5 local grader: provisional 3/3 each; Q1–Q5 explanation drafts included, evidence pending |
+| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1–Q6 local grader: provisional 3/3 each; Q1–Q6 explanation drafts included, evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
-| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q5 local grader: provisional 3/3 each; Q2–Q5 interpreters unspecified |
+| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q6 local grader: provisional 3/3 each; Q2–Q6 interpreters unspecified |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
 | [Agent instructions](../AGENTS.md) | Documentation scope, source boundaries and member-data restrictions | Applies to work throughout the repository |
 | [Automation guide](../.github/AUTOMATION.md) | Existing workflows and evidence collection behavior | References the confirmed responsibility plan |
@@ -28,8 +28,9 @@ The report plan still records the lecturer's disclosure requirement as an
 assignment requirement; it contains no usage log or prompt transcript.
 
 The current checkout's Q1 and Q2 implementations in `src/search.py` each pass
-all five supplied tests, Q3 passes all ten, Q4 passes all six, and Q5 passes its
-`corner_tiny_corner` test; each reports 3/3 provisional points. Q1 uses
+all five supplied tests, Q3 passes all ten, Q4 passes all six, Q5 passes its
+`corner_tiny_corner` test, and Q6 passes its supplied heuristic checks; each
+reports 3/3 provisional points. Q1 uses
 `util.Stack` and a visited-state set to follow the
 latest-added path first, so it does not guarantee a fewest-move solution. Q2
 uses `util.Queue` to expand shallowest paths first and finds a fewest-move path
@@ -44,10 +45,12 @@ with `g + h` priorities and reports a 68-step `mediumMaze` path with 221
 expanded nodes. Q5 represents state as Pac-Man's position and a tuple of
 visited corners, and its `tinyCorner` test reports a 28-step solution. The Q5
 run also passes its Q2 dependency, which reports a 68-step `mediumMaze` path
-with 269 expanded nodes. The supplied Q2–Q5 outputs do not identify their
-interpreters. All five scores remain unregistered. Q6–Q7 remain unimplemented.
-The completed submission report and code ZIP still require Q1–Q5 output
-screenshots, owner review of the Q1–Q5 explanation drafts, and genuine
-contribution evidence. All artifacts remain
-outside `src/`; further source implementation requires its own explicit
-authorization.
+with 269 expanded nodes. Q6's `cornersHeuristic` checks all orders of unvisited
+corners using Manhattan distances; its supplied test reports a 106-step
+`mediumCorners` solution and 741 expanded nodes, and its Q4 dependency passes
+all six tests. The supplied Q2–Q6 outputs do not identify their interpreters.
+All six scores remain unregistered. Q7 remains unimplemented. The completed
+submission report and code ZIP still require Q1–Q6 output screenshots, owner
+review of the Q1–Q6 explanation drafts, and genuine contribution evidence. All
+artifacts remain outside `src/`; further source implementation requires its
+own explicit authorization.

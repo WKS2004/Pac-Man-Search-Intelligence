@@ -6,10 +6,10 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Q1, Q2, Q3, Q4 and Q5 each pass the supplied
-grader for 3/3 provisional points; Q1 was run in Python 3.11 `cs188`, and the
-supplied Q2–Q5 outputs do not identify their interpreters. Q6–Q7 implementation
-remains pending, and report evidence for all question sections is incomplete.
+**Submission report status:** Q1–Q6 each pass the supplied grader for 3/3
+provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied Q2–Q6
+outputs do not identify their interpreters. Q7 implementation remains pending,
+and report evidence for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -41,7 +41,7 @@ questions. The supplied PDF states no submission deadline.
 | Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q6 | Sanuda | `cornersHeuristic` | Actual implementation, q6 screenshot, correctness argument and expansion count |
+| Q6 | Sanuda | `cornersHeuristic` | Supplied q6 output reports provisional 3/3; Q4 dependency also reports 3/3. `mediumCorners` path length 106, 741 expanded nodes (within the 1,200-node target). Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q7 | Wanshaja | `foodHeuristic` | Actual implementation, q7 screenshot, correctness argument and expansion count |
 
 Each question section must identify the edited functions/code blocks, include a
@@ -140,11 +140,28 @@ true. This compact, hashable state lets graph search distinguish reaching the
 same position with different remaining corners, while `_expanded` counts each
 successor expansion as required by the supplied framework.
 
-The Q1/Q2/Q3/Q4/Q5 output screenshots, owner review of the Q1/Q2/Q3/Q4/Q5
-explanation drafts, and genuine contribution evidence remain needed for the report. This records
-repository code and test status only; it does not establish which member
-authored any implementation or complete that member's contribution evidence.
-Q6–Q7 remain unimplemented.
+The supplied output for `python autograder.py -q q6` runs dependency Q4 and Q6.
+All six Q4 tests pass for 3/3. Q6's three heuristic sanity checks pass, and its
+`mediumCorners` run reports a 106-step solution with 741 expanded nodes, below
+the PDF's 1,200-node full-credit expansion threshold. Both scores are
+provisional and unregistered. The output does not identify the Python
+interpreter.
+
+**Q6 explanation draft for owner review (under 200 words):** The heuristic
+considers every order of the unvisited corners and returns the smallest sum of
+Manhattan distances from Pac-Man's position through that order. Manhattan
+distance ignores walls, so each leg is no longer than the corresponding maze
+path. Every possible corner order is considered, so the minimum relaxed tour
+cannot exceed the true route cost. The Manhattan triangle inequality keeps the
+estimate consistent across a one-step move; when that move visits a corner,
+the step accounts for removing that corner from the remaining set. The value is
+nonnegative and is zero when all corners have been visited.
+
+The Q1–Q6 output screenshots, owner review of the Q1–Q6 explanation drafts, and
+genuine contribution evidence remain needed for the report. This records
+repository code and test status only; it does not establish
+which member authored any implementation or complete that member's contribution
+evidence. Q7 remains unimplemented.
 
 ## Verification and performance
 
@@ -199,14 +216,14 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Capture the actual Q1, Q2, Q3, Q4 and Q5 autograder output screenshots.
-- [ ] Have the Q1–Q5 owners review and finalize their explanation drafts in
+- [ ] Capture the actual Q1, Q2, Q3, Q4, Q5 and Q6 autograder output screenshots.
+- [ ] Have the Q1–Q6 owners review and finalize their explanation drafts in
   Current implementation status.
-- [ ] Implement Q6-Q7 and verify legal paths and required optimality.
-- [ ] Run the supplied autograder for Q6-Q7 and record actual results.
+- [ ] Implement Q7 and verify legal paths and required optimality.
+- [ ] Run the supplied autograder for Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
-- [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
-  nonnegativity; record expansion counts and runtime.
+- [ ] Have the Q6 owner review its admissibility and consistency explanation;
+  verify Q7's heuristic properties and record Q6/Q7 runtime evidence.
 - [ ] Capture actual results for all seven question sections.
 - [ ] Check word limits, formatting, screenshot clarity and identity consistency.
 - [ ] Reconcile final contributions with actual Git evidence.

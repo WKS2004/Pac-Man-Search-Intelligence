@@ -9,18 +9,20 @@ heuristics to visiting all four corners and collecting food.
 
 **Development status:** Q1's `depthFirstSearch`, Q2's `breadthFirstSearch`,
 Q3's `uniformCostSearch`, and Q4's `aStarSearch` in `src/search.py`, plus Q5's
-`CornersProblem` in `src/searchAgents.py`, pass their supplied tests for 3/3
-local points each. Q1 was run in the assignment-recommended Python 3.11 `cs188`
-environment and returned a 130-step `mediumMaze` path with 146 expanded nodes.
-The supplied Q2 output reports a 68-step path and 269 expanded
-nodes on `mediumMaze`; the supplied Q2, Q3 and Q4 outputs do not identify their
-interpreters. Q3 reports `mediumMaze` paths of 68, 74 and 152 steps with 269,
-260 and 173 expanded nodes, and a 7-step `testSearch` path with 14 expanded
-nodes. Q4 reports a 68-step `mediumMaze` path with 221 expanded nodes. Q5 passes
-its `tinyCorner` test with a 28-step solution; its run also passes the five-test
-Q2 dependency. The supplied Q5 output does not identify its interpreter. All
-five scores are provisional and not registered. Q6–Q7 remain starter
-implementations; the corner heuristic and food heuristic still need implementation.
+`CornersProblem` and Q6's `cornersHeuristic` in `src/searchAgents.py`, pass their
+supplied tests for 3/3 local points each. Q1 was run in the
+assignment-recommended Python 3.11 `cs188` environment and returned a 130-step
+`mediumMaze` path with 146 expanded nodes. The supplied Q2 output reports a
+68-step path and 269 expanded nodes on `mediumMaze`; the supplied Q2–Q6 outputs
+do not identify their interpreters. Q3 reports `mediumMaze` paths of 68, 74 and
+152 steps with 269, 260 and 173 expanded nodes, and a 7-step `testSearch` path
+with 14 expanded nodes. Q4 reports a 68-step `mediumMaze` path with 221 expanded
+nodes. Q5 passes its `tinyCorner` test with a 28-step solution; its run also
+passes the five-test Q2 dependency. Q6 passes three heuristic sanity checks and
+reports a 106-step `mediumCorners` solution with 741 expanded nodes; its run
+also passes the six-test Q4 dependency. Q6's expansion count is within the PDF's
+1,200-node full-credit target. All six scores are provisional and unregistered.
+Q7's food heuristic remains to be implemented.
 
 Q1's depth-first search uses the supplied LIFO `util.Stack` and stores each
 state with its action path. It pops the latest entry, returns its path at the
@@ -42,6 +44,11 @@ known cost for each state and skips stale queue entries.
 Q5's `CornersProblem` state pairs Pac-Man's position with a tuple recording
 which corners have been visited. Legal successors preserve that history and
 cost one; the goal is reached when all four corners are marked.
+
+Q6's `cornersHeuristic` evaluates every order of the unvisited corners and
+returns the minimum Manhattan-distance tour. Manhattan distance ignores walls,
+so each leg is a lower bound on maze distance; minimizing over every order
+avoids an arbitrary greedy route.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
@@ -137,10 +144,11 @@ Keyboard control requires graphics; it cannot be combined with text-only play.
 
 ## Search examples
 
-Run these from `src/`. The supplied Q1–Q5 autograder outputs report provisional
-3/3 each. Q1 was run in Python 3.11 `cs188`; the Q2–Q5 outputs do not identify
-their interpreters. Q6–Q7 still need implementation. These Pac-Man commands
-are usage examples and do not claim that Q6–Q7 pass.
+Run these from `src/`. The supplied Q1–Q6 autograder outputs report provisional
+3/3 each. Q1 was run in Python 3.11 `cs188`; the Q2–Q6 outputs do not identify
+their interpreters. Q6 reports a 106-step `mediumCorners` solution and 741
+expanded nodes. Q7 still needs implementation; the Q6 command below corresponds
+to a passing supplied autograder result.
 
 ```sh
 # Q1: depth-first search
@@ -271,12 +279,13 @@ whole-solution viva.
 See the [report and submission plan](docs/report-submission-plan.md) and
 [shareable contribution plan](output/pdf/Group_2026-AI-45_Contribution_Plan.pdf).
 The allocation is finalized. Q1 and Q2 each pass all five supplied tests, Q3
-passes all ten, Q4 passes all six, and Q5 passes its test with its Q2 dependency;
-each reports 3/3 provisional local points. Q5's `tinyCorner` solution is 28
-steps. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q5 outputs do not
-identify their interpreters. Q6–Q7 implementation and genuine
-grading/contribution evidence remain pending. The report still needs Q1–Q5
-output screenshots, owner review of the Q1–Q5 explanation drafts, and genuine
+passes all ten, Q4 passes all six, Q5 passes with its Q2 dependency, and Q6
+passes with its Q4 dependency; each reports 3/3 provisional local points. Q5's
+`tinyCorner` solution is 28 steps. Q6's `mediumCorners` solution is 106 steps
+with 741 expanded nodes. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q6
+outputs do not identify their interpreters. Q7 implementation and genuine
+grading/contribution evidence remain pending. The report still needs Q1–Q6
+output screenshots, owner review of the Q1–Q6 explanation drafts, and genuine
 contribution evidence.
 The [document index](docs/README.md) identifies each document's purpose and status.
 Repository AI usage records are not created or maintained, as requested by the user.
