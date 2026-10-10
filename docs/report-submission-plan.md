@@ -6,10 +6,10 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Q1 and Q2 each pass the supplied grader for 3/3
-provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied Q2
-output does not identify its interpreter. Q3–Q7 implementation remains pending,
-and report evidence for all question sections is incomplete.
+**Submission report status:** Q1, Q2 and Q3 each pass the supplied grader for
+3/3 provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied Q2
+and Q3 outputs do not identify their interpreters. Q4–Q7 implementation remains
+pending, and report evidence for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -38,7 +38,7 @@ questions. The supplied PDF states no submission deadline.
 | --- | --- | --- | --- |
 | Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; explanation draft appears below. Owner review, screenshot and actual contribution evidence are still needed |
 | Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q3 | Adithya | `uniformCostSearch` | Actual implementation, q3 screenshot and explanation |
+| Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q4 | Sanuda | `aStarSearch` | Actual implementation, q4 screenshot and explanation |
 | Q5 | Ushan | `CornersProblem` start, goal and successor methods | Actual implementation, q5 screenshot and explanation |
 | Q6 | Sanuda | `cornersHeuristic` | Actual implementation, q6 screenshot, correctness argument and expansion count |
@@ -86,11 +86,31 @@ goal path a shortest path in number of moves. The implementation does not use
 `stepCost`, so it does not guarantee minimum total cost when move costs differ.
 If the queue empties before a goal is found, it returns an empty path.
 
-The Q1/Q2 output screenshots, owner review of both explanation drafts, and
-genuine contribution evidence remain needed for the report. This records
+The supplied Q3 output for `python autograder.py -q q3` reports all ten tests
+passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
+`graph_infinite`, `graph_manypaths`, `ucs_0_graph`, `ucs_1_problemC`,
+`ucs_2_problemE`, `ucs_3_problemW`, `ucs_4_testSearch` and
+`ucs_5_goalAtDequeue`. The three `mediumMaze` cases report solution lengths
+and expansions of 68/269, 74/260 and 152/173; `testSearch` reports 7/14. The
+output does not identify the Python interpreter. The score is provisional and
+unregistered.
+
+**Q3 explanation draft for owner review (under 200 words):** Uniform-cost
+search puts the start state, an empty action path and cost zero in the supplied
+`util.PriorityQueue`. Each entry is removed in order of lowest accumulated
+cost. The algorithm skips states already expanded, marks a newly removed state
+visited, and returns its action path if it is a goal. Otherwise, it adds each
+unvisited successor's `stepCost` to the current cost, appends the successor's
+action to the path, and queues the resulting entry with its cumulative cost as
+priority. Assuming nonnegative step costs, the first goal removed has minimum
+total path cost. If the queue empties before a goal is found, it returns an
+empty path.
+
+The Q1/Q2/Q3 output screenshots, owner review of the Q1/Q2/Q3 explanation
+drafts, and genuine contribution evidence remain needed for the report. This records
 repository code and test status only; it does not establish which member
-authored either implementation or complete that member's contribution evidence.
-Q3–Q7 remain unimplemented.
+authored any implementation or complete that member's contribution evidence.
+Q4–Q7 remain unimplemented.
 
 ## Verification and performance
 
@@ -145,11 +165,11 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Capture the actual Q1 and Q2 autograder output screenshots.
-- [ ] Have the Q1 and Q2 owners review and finalize their explanation drafts in
+- [ ] Capture the actual Q1, Q2 and Q3 autograder output screenshots.
+- [ ] Have the Q1–Q3 owners review and finalize their explanation drafts in
   Current implementation status.
-- [ ] Implement Q3-Q7 and verify legal paths and required optimality.
-- [ ] Run the supplied autograder for Q3-Q7 and record actual results.
+- [ ] Implement Q4-Q7 and verify legal paths and required optimality.
+- [ ] Run the supplied autograder for Q4-Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
 - [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
   nonnegativity; record expansion counts and runtime.

@@ -7,14 +7,17 @@ supplied UC Berkeley Pac-Man framework. The project explores depth-first search,
 breadth-first search, uniform-cost search and A*, then applies search states and
 heuristics to visiting all four corners and collecting food.
 
-**Development status:** Q1's `depthFirstSearch` and Q2's `breadthFirstSearch` in
-`src/search.py` each pass all five supplied tests for 3/3 local points. Q1 was
-run in the assignment-recommended Python 3.11 `cs188` environment and returned a
-130-step `mediumMaze` path with 146 expanded nodes. The supplied Q2 output does
-not identify its Python version; it reports a 68-step path and 269 expanded
-nodes on `mediumMaze`. Both scores are provisional and not registered. Q3–Q7
-remain starter implementations; the corner state methods and supplied corner
-and food heuristics still need implementation.
+**Development status:** Q1's `depthFirstSearch`, Q2's `breadthFirstSearch`, and
+Q3's `uniformCostSearch` in `src/search.py` pass their supplied tests for 3/3
+local points each. Q1 was run in the assignment-recommended Python 3.11
+`cs188` environment and returned a 130-step `mediumMaze` path with 146
+expanded nodes. The supplied Q2 output reports a 68-step path and 269 expanded
+nodes on `mediumMaze`; the supplied Q2 and Q3 outputs do not identify their
+interpreters. Q3 reports `mediumMaze` paths of 68, 74 and 152 steps with 269,
+260 and 173 expanded nodes, and a 7-step `testSearch` path with 14 expanded
+nodes. All three scores are provisional and not registered. Q4–Q7 remain
+starter implementations; the corner state methods and supplied corner and food
+heuristics still need implementation.
 
 Q1's depth-first search uses the supplied LIFO `util.Stack` and stores each
 state with its action path. It pops the latest entry, returns its path at the
@@ -24,6 +27,10 @@ explores deeper paths first but does not guarantee a fewest-move solution.
 Q2's breadth-first search uses the supplied FIFO `util.Queue` to expand
 shallowest paths first. With equal step costs, it returns a path with the fewest
 moves; it does not optimize total cost when step costs differ.
+
+Q3's uniform-cost search uses the supplied `util.PriorityQueue` ordered by
+accumulated path cost. Assuming nonnegative step costs, the first goal removed
+from the queue has minimum total cost.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
@@ -119,10 +126,10 @@ Keyboard control requires graphics; it cannot be combined with text-only play.
 
 ## Search examples
 
-Run these from `src/`. The supplied Q1 and Q2 autograder outputs report
-provisional 3/3 each; Q1 was run in Python 3.11 `cs188`, while the Q2 output
-does not identify its interpreter. Q3–Q7 still need implementation. These
-Pac-Man commands are usage examples and do not claim that Q3–Q7 pass.
+Run these from `src/`. The supplied Q1, Q2 and Q3 autograder outputs report
+provisional 3/3 each. Q1 was run in Python 3.11 `cs188`; the Q2 and Q3 outputs
+do not identify their interpreters. Q4–Q7 still need implementation. These
+Pac-Man commands are usage examples and do not claim that Q4–Q7 pass.
 
 ```sh
 # Q1: depth-first search
@@ -252,12 +259,13 @@ whole-solution viva.
 
 See the [report and submission plan](docs/report-submission-plan.md) and
 [shareable contribution plan](output/pdf/Group_2026-AI-45_Contribution_Plan.pdf).
-The allocation is finalized. Q1 and Q2 each pass all five supplied tests for
-3/3 provisional local points. Q1 was run in Python 3.11 `cs188`; the supplied Q2
-output does not identify its interpreter. Q3–Q7 implementation and genuine
-grading/contribution evidence remain pending. The report still needs Q1/Q2
-output screenshots, the Q1 explanation, owner review of the Q2 explanation
-draft, and genuine contribution evidence.
+The allocation is finalized. Q1 and Q2 each pass all five supplied tests, and
+Q3 passes all ten supplied tests; each reports 3/3 provisional local points.
+Q1 was run in Python 3.11 `cs188`; the supplied Q2 and Q3 outputs do not
+identify their interpreters. Q4–Q7 implementation and genuine
+grading/contribution evidence remain pending. The report still needs Q1–Q3
+output screenshots, owner review of the Q1/Q2/Q3 explanation drafts, and
+genuine contribution evidence.
 The [document index](docs/README.md) identifies each document's purpose and status.
 Repository AI usage records are not created or maintained, as requested by the user.
 
