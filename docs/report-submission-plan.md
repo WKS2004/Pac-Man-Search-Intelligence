@@ -6,9 +6,9 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Q1, Q2, Q3 and Q4 each pass the supplied grader
-for 3/3 provisional points; Q1 was run in Python 3.11 `cs188`, and the supplied
-Q2, Q3 and Q4 outputs do not identify their interpreters. Q5–Q7 implementation
+**Submission report status:** Q1, Q2, Q3, Q4 and Q5 each pass the supplied
+grader for 3/3 provisional points; Q1 was run in Python 3.11 `cs188`, and the
+supplied Q2–Q5 outputs do not identify their interpreters. Q6–Q7 implementation
 remains pending, and report evidence for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
@@ -40,7 +40,7 @@ questions. The supplied PDF states no submission deadline.
 | Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Actual implementation, q5 screenshot and explanation |
+| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q6 | Sanuda | `cornersHeuristic` | Actual implementation, q6 screenshot, correctness argument and expansion count |
 | Q7 | Wanshaja | `foodHeuristic` | Actual implementation, q7 screenshot, correctness argument and expansion count |
 
@@ -124,11 +124,27 @@ and allows a cheaper path to reopen a state. With an admissible heuristic that
 is zero at goals and nonnegative step costs, A* returns a minimum-cost path. If
 the queue empties first, it returns an empty path.
 
-The Q1/Q2/Q3/Q4 output screenshots, owner review of the Q1/Q2/Q3/Q4 explanation
-drafts, and genuine contribution evidence remain needed for the report. This records
+The supplied output for `python autograder.py -q q5` runs dependency Q2 and Q5.
+All five Q2 tests pass for 3/3, with a 68-step `mediumMaze` path and 269
+expanded nodes. The Q5 `corner_tiny_corner` test passes for 3/3 with a 28-step
+solution on `tinyCorner`. Both scores are provisional and unregistered. The
+output does not identify the Python interpreter.
+
+**Q5 explanation draft for owner review (under 200 words):** `CornersProblem`
+represents a state as Pac-Man's position paired with a tuple of four booleans,
+one per corner. The start state marks a corner visited if Pac-Man begins there.
+For each legal move, the successor records the new position and updates the
+tuple so visited corners stay marked and a corner at the new position becomes
+visited. Each move costs one. A state is a goal when all four tuple entries are
+true. This compact, hashable state lets graph search distinguish reaching the
+same position with different remaining corners, while `_expanded` counts each
+successor expansion as required by the supplied framework.
+
+The Q1/Q2/Q3/Q4/Q5 output screenshots, owner review of the Q1/Q2/Q3/Q4/Q5
+explanation drafts, and genuine contribution evidence remain needed for the report. This records
 repository code and test status only; it does not establish which member
 authored any implementation or complete that member's contribution evidence.
-Q5–Q7 remain unimplemented.
+Q6–Q7 remain unimplemented.
 
 ## Verification and performance
 
@@ -183,11 +199,11 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Capture the actual Q1, Q2, Q3 and Q4 autograder output screenshots.
-- [ ] Have the Q1–Q4 owners review and finalize their explanation drafts in
+- [ ] Capture the actual Q1, Q2, Q3, Q4 and Q5 autograder output screenshots.
+- [ ] Have the Q1–Q5 owners review and finalize their explanation drafts in
   Current implementation status.
-- [ ] Implement Q5-Q7 and verify legal paths and required optimality.
-- [ ] Run the supplied autograder for Q5-Q7 and record actual results.
+- [ ] Implement Q6-Q7 and verify legal paths and required optimality.
+- [ ] Run the supplied autograder for Q6-Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
 - [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
   nonnegativity; record expansion counts and runtime.
