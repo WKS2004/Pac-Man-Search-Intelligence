@@ -13,7 +13,7 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
 | [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1–Q6: provisional 3/3 each; Q7: provisional 4/4; Q1–Q7 explanation drafts included, report evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
-| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q6: provisional 3/3 each; Q7: provisional 4/4; Q2–Q7 interpreters unspecified |
+| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q6: provisional 3/3 each; Q7: provisional 4/4; Q1–Q7 tested with Python 3.11 in the guideline-created Conda `cs188` environment |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
 | [Agent instructions](../AGENTS.md) | Documentation scope, source boundaries and member-data restrictions | Applies to work throughout the repository |
 | [Automation guide](../.github/AUTOMATION.md) | Existing workflows and evidence collection behavior | References the confirmed responsibility plan |
@@ -36,8 +36,9 @@ latest-added path first, so it does not guarantee a fewest-move solution. Q2
 uses `util.Queue` to expand shallowest paths first and finds a fewest-move path
 when all step costs are equal. Q3 uses `util.PriorityQueue` ordered by
 accumulated cost to find a minimum-total-cost path when step costs are
-nonnegative. Q1 was run in the assignment-recommended Python 3.11 `cs188`
-environment and returned a 130-step `mediumMaze` path with 146 expanded nodes.
+nonnegative. All Q1–Q7 autograder runs used the Conda environment named
+`cs188`, created exactly as specified in the Project Guidelines with Python
+3.11. Q1 returned a 130-step `mediumMaze` path with 146 expanded nodes.
 The supplied Q2 output reports a 68-step path and 269 expanded nodes; Q3 reports
 `mediumMaze` paths of 68, 74 and 152 steps with 269, 260 and 173 expanded nodes,
 and a 7-step `testSearch` path with 14 expanded nodes. Q4 uses `util.PriorityQueue`
@@ -52,8 +53,7 @@ all six tests. Q7 combines the nearest-food Manhattan distance and the Manhattan
 minimum spanning tree over remaining food, caching tree costs by food set. Its
 17 heuristic checks pass; the `trickySearch` result is 7,137 expanded nodes,
 below the PDF's 9,000-node target but above the grader's additional 7,000-node
-threshold. Its Q4 dependency also passes all six tests. The supplied Q2–Q7
-outputs do not identify their interpreters. All seven scores remain
+threshold. Its Q4 dependency also passes all six tests. All seven scores remain
 unregistered. The completed submission report and code ZIP still require Q1–Q7
 output screenshots, owner review of the Q1–Q7 explanation drafts, and genuine
 contribution evidence. All artifacts remain outside `src/`; further source

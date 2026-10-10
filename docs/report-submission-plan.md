@@ -7,10 +7,11 @@
 **Planning document:** Finalized
 
 **Submission report status:** Q1–Q6 each report 3/3 and Q7 reports 4/4
-provisional points. Q1 was run in Python 3.11 `cs188`; the supplied Q2–Q7
-outputs do not identify their interpreters. Q7's `trickySearch` expansion count
-is 7,137, within the PDF's 9,000-node target and above the grader's additional
-7,000-node threshold. Report evidence for all question sections is incomplete.
+provisional points. All Q1–Q7 autograder runs used the Conda environment named
+`cs188`, created exactly as specified in the Project Guidelines with Python
+3.11. Q7's `trickySearch` expansion count is 7,137, within the PDF's 9,000-node target and
+above the grader's additional 7,000-node threshold. Report evidence for all
+question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -37,13 +38,13 @@ questions. The supplied PDF states no submission deadline.
 
 | Report section | Owner | Required function or block | Evidence still needed |
 | --- | --- | --- | --- |
-| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; explanation draft appears below. Owner review, screenshot and actual contribution evidence are still needed |
-| Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q6 | Sanuda | `cornersHeuristic` | Supplied q6 output reports provisional 3/3; Q4 dependency also reports 3/3. `mediumCorners` path length 106, 741 expanded nodes (within the 1,200-node target). Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed. Interpreter not identified in the output |
-| Q7 | Wanshaja | `foodHeuristic` | Supplied q7 output reports provisional 4/4; Q4 dependency also reports 3/3. All 17 heuristic checks pass. `trickySearch` expands 7,137 nodes: within the PDF's 9,000-node target but above the grader's additional 7,000-node threshold. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed. Interpreter not identified in the output |
+| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in the Conda `cs188` environment specified by the Project Guidelines, using Python 3.11; explanation draft appears below. Owner review, screenshot and actual contribution evidence are still needed |
+| Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q6 | Sanuda | `cornersHeuristic` | Supplied q6 output reports provisional 3/3; Q4 dependency also reports 3/3. `mediumCorners` path length 106, 741 expanded nodes (within the 1,200-node target). Run in Conda `cs188` with Python 3.11. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed |
+| Q7 | Wanshaja | `foodHeuristic` | Supplied q7 output reports provisional 4/4; Q4 dependency also reports 3/3. All 17 heuristic checks pass. `trickySearch` expands 7,137 nodes: within the PDF's 9,000-node target but above the grader's additional 7,000-node threshold. Run in Conda `cs188` with Python 3.11. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed |
 
 Each question section must identify the edited functions/code blocks, include a
 clear screenshot of actual autograder output and explain the logic, data
@@ -73,8 +74,8 @@ search follows depth-first order, it does not guarantee the fewest-move path.
 The supplied Q2 output for `python autograder.py -q q2` reports all five tests
 passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
 `graph_infinite`, `graph_manypaths` and `pacman_1`. On `mediumMaze`, it reports
-a 68-step solution and 269 expanded nodes. The output does not identify the
-Python interpreter. Both scores are provisional and unregistered.
+a 68-step solution and 269 expanded nodes. Both scores are provisional and
+unregistered.
 
 **Q2 explanation draft for owner review (under 200 words):** Breadth-first
 search places the start state and an empty action path in the supplied
@@ -93,8 +94,7 @@ passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
 `ucs_2_problemE`, `ucs_3_problemW`, `ucs_4_testSearch` and
 `ucs_5_goalAtDequeue`. The three `mediumMaze` cases report solution lengths
 and expansions of 68/269, 74/260 and 152/173; `testSearch` reports 7/14. The
-output does not identify the Python interpreter. The score is provisional and
-unregistered.
+score is provisional and unregistered.
 
 **Q3 explanation draft for owner review (under 200 words):** Uniform-cost
 search puts the start state, an empty action path and cost zero in the supplied
@@ -111,8 +111,7 @@ The supplied Q4 output for `python autograder.py -q q4` reports all six tests
 passing for 3/3 local points: `astar_0`, `astar_1_graph_heuristic`,
 `astar_2_manhattan`, `astar_3_goalAtDequeue`, `graph_backtrack` and
 `graph_manypaths`. On `mediumMaze`, it reports a 68-step path and 221 expanded
-nodes. The output does not identify the Python interpreter. The score is
-provisional and unregistered.
+nodes. The score is provisional and unregistered.
 
 **Q4 explanation draft for owner review (under 200 words):** A* puts the start
 state, an empty action path and cost zero in the supplied `util.PriorityQueue`,
@@ -128,8 +127,7 @@ the queue empties first, it returns an empty path.
 The supplied output for `python autograder.py -q q5` runs dependency Q2 and Q5.
 All five Q2 tests pass for 3/3, with a 68-step `mediumMaze` path and 269
 expanded nodes. The Q5 `corner_tiny_corner` test passes for 3/3 with a 28-step
-solution on `tinyCorner`. Both scores are provisional and unregistered. The
-output does not identify the Python interpreter.
+solution on `tinyCorner`. Both scores are provisional and unregistered.
 
 **Q5 explanation draft for owner review (under 200 words):** `CornersProblem`
 represents a state as Pac-Man's position paired with a tuple of four booleans,
@@ -145,8 +143,7 @@ The supplied output for `python autograder.py -q q6` runs dependency Q4 and Q6.
 All six Q4 tests pass for 3/3. Q6's three heuristic sanity checks pass, and its
 `mediumCorners` run reports a 106-step solution with 741 expanded nodes, below
 the PDF's 1,200-node full-credit expansion threshold. Both scores are
-provisional and unregistered. The output does not identify the Python
-interpreter.
+provisional and unregistered.
 
 **Q6 explanation draft for owner review (under 200 words):** The heuristic
 considers every order of the unvisited corners and returns the smallest sum of
@@ -163,8 +160,7 @@ All six Q4 tests pass for 3/3. All 17 Q7 food-heuristic checks pass. The
 `trickySearch` expansion check reports 7,137 nodes and displays `FAIL` because
 it exceeds the supplied grader's additional 7,000-node threshold. This remains
 below the PDF's 9,000-node full-credit target, and the overall Q7 score is 4/4.
-Both scores are provisional and unregistered. The output does not identify the
-Python interpreter.
+Both scores are provisional and unregistered.
 
 **Q7 explanation draft for owner review (under 200 words):** `foodHeuristic`
 returns zero when no food remains. Otherwise, it adds the Manhattan distance
