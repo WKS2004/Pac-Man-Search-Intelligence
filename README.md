@@ -15,12 +15,13 @@ provisional local points. All Q1–Q7 autograder runs used the Conda environment
 named `cs188`, created exactly as specified in the Project Guidelines with
 Python 3.11. Q1 returned a 130-step `mediumMaze` path with 146 expanded nodes.
 The supplied Q2 output reports a 68-step path and 269 expanded nodes on
-`mediumMaze`. Q3 reports `mediumMaze` paths of 68, 74 and 152 steps with 269, 260 and 173 expanded
-nodes, and a 7-step `testSearch` path with 14 expanded nodes. Q4 reports a
-68-step `mediumMaze` path with 221 expanded nodes. Q5 passes its `tinyCorner`
-test with a 28-step solution and its five-test Q2 dependency. Q6 passes three
-heuristic sanity checks and reports a 106-step `mediumCorners` solution with 741
-expanded nodes; its run also passes the six-test Q4 dependency. Q7's 17 food
+`mediumMaze`. Q3 reports `mediumMaze` paths of 68, 74 and 152 steps, with 269,
+260 and 173 expanded nodes, and a 7-step `testSearch` path with 14 expanded
+nodes. Q4 reports a 68-step `mediumMaze` path with 221 expanded nodes. Q5 passes
+its `tinyCorner` test with a 28-step solution and its five-test Q2 dependency.
+Q6 passes three heuristic sanity checks and reports a 106-step `mediumCorners`
+solution with 741 expanded nodes; its run also passes the six-test Q4
+dependency. Q7's 17 food
 heuristic checks pass; its `trickySearch` expansion result is 7,137 nodes, below
 the PDF's 9,000-node target but above the supplied grader's additional 7,000-node
 threshold. All seven question scores are provisional and unregistered.

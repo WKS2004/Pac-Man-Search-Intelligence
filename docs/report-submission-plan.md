@@ -9,13 +9,14 @@
 **Submission report status:** Q1–Q6 each report 3/3 and Q7 reports 4/4
 provisional points. All Q1–Q7 autograder runs used the Conda environment named
 `cs188`, created exactly as specified in the Project Guidelines with Python
-3.11. Q7's `trickySearch` expansion count is 7,137, within the PDF's 9,000-node target and
-above the grader's additional 7,000-node threshold. Report evidence for all
-question sections is incomplete.
+3.11. Q7's `trickySearch` expansion count is 7,137, within the PDF's 9,000-node
+target and above the grader's additional 7,000-node threshold. Report evidence
+for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
 completed work until it is supported by evidence.
+
 Ushan coordinates report assembly and Adithya coordinates final verification.
 Each question owner supplies their explanation and actual grading evidence;
 Wanshaja coordinates food benchmark and Git evidence collection.
@@ -239,7 +240,7 @@ maintaining such records.
 - [ ] Verify Q5 state representation and corner bookkeeping.
 - [ ] Have the Q6/Q7 owners review their admissibility and consistency
   explanations; record Q6/Q7 runtime evidence.
-- [ ] Capture actual results for all seven question sections.
+- [x] Record the supplied autograder results for all seven question sections.
 - [ ] Check word limits, formatting, screenshot clarity and identity consistency.
 - [ ] Reconcile final contributions with actual Git evidence.
 - [ ] Complete all AI disclosures, including assistance outside this chat.
@@ -248,8 +249,8 @@ maintaining such records.
 - [ ] Complete a timed team viva rehearsal with questions for every member.
 - [ ] Verify source integrity and inspect the final ZIP contents.
 
-The allocation and planning documents are finalized. This checklist deliberately
-remains open until the underlying implementation and evidence are complete.
+The allocation and planning documents are finalized. This checklist remains
+open until the outstanding report evidence and final-submission steps are complete.
 
 ## Submission files
 
