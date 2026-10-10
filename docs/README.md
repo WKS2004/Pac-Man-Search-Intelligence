@@ -11,9 +11,9 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
-| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1–Q3 local grader: provisional 3/3 each; Q1–Q3 explanation drafts included, evidence pending |
+| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1–Q4 local grader: provisional 3/3 each; Q1–Q4 explanation drafts included, evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
-| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q3 local grader: provisional 3/3 each; Q2/Q3 interpreters unspecified |
+| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1–Q4 local grader: provisional 3/3 each; Q2–Q4 interpreters unspecified |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
 | [Agent instructions](../AGENTS.md) | Documentation scope, source boundaries and member-data restrictions | Applies to work throughout the repository |
 | [Automation guide](../.github/AUTOMATION.md) | Existing workflows and evidence collection behavior | References the confirmed responsibility plan |
@@ -28,8 +28,8 @@ The report plan still records the lecturer's disclosure requirement as an
 assignment requirement; it contains no usage log or prompt transcript.
 
 The current checkout's Q1 and Q2 implementations in `src/search.py` each pass
-all five supplied tests, and Q3 passes all ten supplied tests; each reports 3/3
-provisional points. Q1 uses `util.Stack` and a visited-state set to follow the
+all five supplied tests, Q3 passes all ten, and Q4 passes all six; each reports
+3/3 provisional points. Q1 uses `util.Stack` and a visited-state set to follow the
 latest-added path first, so it does not guarantee a fewest-move solution. Q2
 uses `util.Queue` to expand shallowest paths first and finds a fewest-move path
 when all step costs are equal. Q3 uses `util.PriorityQueue` ordered by
@@ -38,10 +38,12 @@ nonnegative. Q1 was run in the assignment-recommended Python 3.11 `cs188`
 environment and returned a 130-step `mediumMaze` path with 146 expanded nodes.
 The supplied Q2 output reports a 68-step path and 269 expanded nodes; Q3 reports
 `mediumMaze` paths of 68, 74 and 152 steps with 269, 260 and 173 expanded nodes,
-and a 7-step `testSearch` path with 14 expanded nodes. The supplied Q2 and Q3
-outputs do not identify their interpreters. All three scores remain
-unregistered. Q4–Q7 remain unimplemented. The completed submission report and
-code ZIP still require Q1–Q3 output screenshots, owner review of the Q1–Q3
-explanation drafts, and genuine contribution evidence. All artifacts remain
+and a 7-step `testSearch` path with 14 expanded nodes. Q4 uses `util.PriorityQueue`
+with `g + h` priorities and reports a 68-step `mediumMaze` path with 221
+expanded nodes. The supplied Q2, Q3 and Q4 outputs do not identify their
+interpreters. All four scores remain unregistered. Q5–Q7 remain unimplemented.
+The completed submission report and code ZIP still require Q1–Q4 output
+screenshots, owner review of the Q1–Q4 explanation drafts, and genuine
+contribution evidence. All artifacts remain
 outside `src/`; further source implementation requires its own explicit
 authorization.
