@@ -36,7 +36,7 @@ questions. The supplied PDF states no submission deadline.
 
 | Report section | Owner | Required function or block | Evidence still needed |
 | --- | --- | --- | --- |
-| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; screenshot, explanation and actual contribution evidence are still needed |
+| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; explanation draft appears below. Owner review, screenshot and actual contribution evidence are still needed |
 | Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed. Interpreter not identified in the output |
 | Q3 | Adithya | `uniformCostSearch` | Actual implementation, q3 screenshot and explanation |
 | Q4 | Sanuda | `aStarSearch` | Actual implementation, q4 screenshot and explanation |
@@ -59,6 +59,16 @@ local points in the assignment-recommended Python 3.11 `cs188` environment:
 `pacman_1`. On `mediumMaze`, the grader reported a 130-step solution and 146
 expanded nodes.
 
+**Q1 explanation draft for owner review (under 200 words):** Depth-first
+search puts the start state and an empty action path in the supplied
+`util.Stack`. It removes the most recently added entry, so it follows one path
+deeper before exploring earlier alternatives. When a goal is reached, it
+returns the actions stored with that state. A visited-state set prevents the
+algorithm from expanding the same state repeatedly; each newly expanded state
+adds its unvisited successors with the corresponding action appended. If the
+stack empties without finding a goal, it returns an empty path. Because this
+search follows depth-first order, it does not guarantee the fewest-move path.
+
 The supplied Q2 output for `python autograder.py -q q2` reports all five tests
 passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
 `graph_infinite`, `graph_manypaths` and `pacman_1`. On `mediumMaze`, it reports
@@ -76,11 +86,11 @@ goal path a shortest path in number of moves. The implementation does not use
 `stepCost`, so it does not guarantee minimum total cost when move costs differ.
 If the queue empties before a goal is found, it returns an empty path.
 
-The Q1 output screenshot and explanation, the Q2 output screenshot and owner
-review of this draft, and genuine contribution evidence remain needed for the
-report. This records repository code and test status only; it does not establish
-which member authored either implementation or complete that member's
-contribution evidence. Q3–Q7 remain unimplemented.
+The Q1/Q2 output screenshots, owner review of both explanation drafts, and
+genuine contribution evidence remain needed for the report. This records
+repository code and test status only; it does not establish which member
+authored either implementation or complete that member's contribution evidence.
+Q3–Q7 remain unimplemented.
 
 ## Verification and performance
 
@@ -136,8 +146,8 @@ maintaining such records.
 ## Final readiness checklist
 
 - [ ] Capture the actual Q1 and Q2 autograder output screenshots.
-- [ ] Write the Q1 explanation and have the Q2 owner review and finalize the
-  draft in Current implementation status.
+- [ ] Have the Q1 and Q2 owners review and finalize their explanation drafts in
+  Current implementation status.
 - [ ] Implement Q3-Q7 and verify legal paths and required optimality.
 - [ ] Run the supplied autograder for Q3-Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.

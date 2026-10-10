@@ -16,6 +16,11 @@ nodes on `mediumMaze`. Both scores are provisional and not registered. Q3–Q7
 remain starter implementations; the corner state methods and supplied corner
 and food heuristics still need implementation.
 
+Q1's depth-first search uses the supplied LIFO `util.Stack` and stores each
+state with its action path. It pops the latest entry, returns its path at the
+goal, skips previously expanded states, and pushes unvisited successors. This
+explores deeper paths first but does not guarantee a fewest-move solution.
+
 Q2's breadth-first search uses the supplied FIFO `util.Queue` to expand
 shallowest paths first. With equal step costs, it returns a path with the fewest
 moves; it does not optimize total cost when step costs differ.

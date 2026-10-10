@@ -11,7 +11,7 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
-| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1/Q2 local grader: provisional 3/3 each; Q2 explanation draft included, evidence pending |
+| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1/Q2 local grader: provisional 3/3 each; explanation drafts included, evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
 | [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1/Q2 local grader: provisional 3/3 each; Q2 interpreter unspecified |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
@@ -30,12 +30,13 @@ assignment requirement; it contains no usage log or prompt transcript.
 The current checkout's Q1 and Q2 implementations in `src/search.py` each pass
 all five supplied tests for 3/3 provisional points. Q2 uses `util.Queue` to
 expand shallowest paths first and finds a fewest-move path when all step costs
-are equal. Q1 was run in the
-assignment-recommended Python 3.11 `cs188` environment and returned a 130-step
-`mediumMaze` path with 146 expanded nodes. The supplied Q2 output reports a
-68-step path and 269 expanded nodes; it does not identify the interpreter. Both
-scores remain unregistered. Q3–Q7 remain unimplemented. The completed
-submission report and code ZIP still require Q1/Q2 output screenshots, the Q1
-explanation, owner review of the Q2 explanation draft, and genuine contribution
-evidence. All artifacts remain outside `src/`; further source implementation
-requires its own explicit authorization.
+are equal. Q1 uses `util.Stack` and a visited-state set to follow the latest
+added path first; it does not guarantee a fewest-move solution. Q1 was run in
+the assignment-recommended Python 3.11 `cs188` environment and returned a
+130-step `mediumMaze` path with 146 expanded nodes. The supplied Q2 output
+reports a 68-step path and 269 expanded nodes; it does not identify the
+interpreter. Both scores remain unregistered. Q3–Q7 remain unimplemented. The
+completed submission report and code ZIP still require Q1/Q2 output screenshots,
+owner review of both explanation drafts, and genuine contribution evidence.
+All artifacts remain outside `src/`; further source implementation requires
+its own explicit authorization.
