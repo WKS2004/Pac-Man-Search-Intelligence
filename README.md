@@ -7,10 +7,12 @@ supplied UC Berkeley Pac-Man framework. The project explores depth-first search,
 breadth-first search, uniform-cost search and A*, then applies search states and
 heuristics to visiting all four corners and collecting food.
 
-**Development status:** the current source still contains the Q1–Q7 starter
-implementations. The generic search functions and corner state methods need
-implementation, and the supplied corner and food heuristics are placeholders.
-Full-score grading is manual while this work is in progress.
+**Development status:** Q1's `depthFirstSearch` in `src/search.py` passes all
+five supplied Q1 tests for 3/3 local points in the assignment-recommended Python
+3.11 `cs188` environment. On `mediumMaze`, it returned a 130-step path and
+expanded 146 nodes. The score is provisional and not registered. Q2–Q7 remain
+starter implementations; the corner state methods and supplied corner and food
+heuristics still need implementation.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
@@ -106,8 +108,9 @@ Keyboard control requires graphics; it cannot be combined with text-only play.
 
 ## Search examples
 
-Run these from `src/` **after implementing the corresponding questions**. They
-are usage examples, not claims that the current starter passes them.
+Run these from `src/`. The supplied Q1 autograder reports provisional 3/3 in
+Python 3.11 `cs188`. Q2–Q7 still need implementation. These Pac-Man commands
+are usage examples and do not claim that Q2–Q7 pass.
 
 ```sh
 # Q1: depth-first search
@@ -237,8 +240,10 @@ whole-solution viva.
 
 See the [report and submission plan](docs/report-submission-plan.md) and
 [shareable contribution plan](output/pdf/Group_2026-AI-45_Contribution_Plan.pdf).
-The allocation is finalized; the submission report still requires implementation
-and genuine grading/contribution evidence.
+The allocation is finalized. Q1 passes all five supplied tests for 3/3
+provisional local points in Python 3.11 `cs188`; Q2–Q7 implementation and
+genuine grading/contribution evidence are still needed before the submission
+report is ready.
 The [document index](docs/README.md) identifies each document's purpose and status.
 Repository AI usage records are not created or maintained, as requested by the user.
 

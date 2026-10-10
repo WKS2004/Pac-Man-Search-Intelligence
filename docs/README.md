@@ -11,9 +11,9 @@ The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Member contributions](member-contributions.md) | Verified names, registration numbers, GitHub usernames, question ownership and handoffs | Finalized responsibility plan |
-| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Finalized requirements; completion evidence pending |
+| [Report and submission plan](report-submission-plan.md) | Report owners, assessment requirements, verification targets and submission checklist | Q1 reports provisional 3/3 in Python 3.11 `cs188`; report evidence pending |
 | [Contribution plan PDF](../output/pdf/Group_2026-AI-45_Contribution_Plan.pdf) | Shareable copy of the responsibility plan | Finalized planning artifact |
-| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Aligned with the confirmed allocation |
+| [Project overview](../README.md) | Setup, search examples, testing and collaboration | Q1 reports provisional 3/3 in Python 3.11 `cs188` |
 | [Contributor and license information](../LICENSE.md) | Confirmed member order and existing license/attribution terms | Aligned with the confirmed team |
 | [Agent instructions](../AGENTS.md) | Documentation scope, source boundaries and member-data restrictions | Applies to work throughout the repository |
 | [Automation guide](../.github/AUTOMATION.md) | Existing workflows and evidence collection behavior | References the confirmed responsibility plan |
@@ -27,7 +27,10 @@ Repository AI usage records have been removed and must not be created or updated
 The report plan still records the lecturer's disclosure requirement as an
 assignment requirement; it contains no usage log or prompt transcript.
 
-The completed submission report and code ZIP require actual implementation,
-verification and contribution evidence. They must not be represented as ready
-merely because these planning documents are finalized. All artifacts remain
-outside `src/`; source implementation requires its own explicit authorization.
+The current checkout's Q1 implementation in `src/search.py` passes all five
+supplied tests for 3/3 provisional points in the assignment-recommended Python
+3.11 `cs188` environment. Q2–Q7 remain unimplemented. The completed submission
+report and code ZIP still require a Q1 output screenshot, explanation, verified
+implementation and genuine contribution evidence. All artifacts remain
+outside `src/`; further source implementation requires its own explicit
+authorization.

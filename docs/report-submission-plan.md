@@ -6,7 +6,9 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Awaiting implementation and genuine evidence
+**Submission report status:** Q1 passes the supplied grader for 3/3 provisional
+points in Python 3.11 `cs188`; Q2–Q7 implementation and report evidence remain
+pending
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
@@ -33,7 +35,7 @@ questions. The supplied PDF states no submission deadline.
 
 | Report section | Owner | Required function or block | Evidence still needed |
 | --- | --- | --- | --- |
-| Q1 | Adithya | `depthFirstSearch` | Actual implementation, q1 screenshot and explanation |
+| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in Python 3.11 `cs188`; screenshot, explanation and actual contribution evidence are still needed |
 | Q2 | Ushan | `breadthFirstSearch` | Actual implementation, q2 screenshot and explanation |
 | Q3 | Adithya | `uniformCostSearch` | Actual implementation, q3 screenshot and explanation |
 | Q4 | Sanuda | `aStarSearch` | Actual implementation, q4 screenshot and explanation |
@@ -45,6 +47,20 @@ Each question section must identify the edited functions/code blocks, include a
 clear screenshot of actual autograder output and explain the logic, data
 structures and heuristic design in **at most 200 words**. Do not write invented
 implementation descriptions or present performance targets as achieved results.
+
+## Current implementation status
+
+`src/search.py` contains a Q1 `depthFirstSearch` implementation using
+`util.Stack` and a visited-state set. The supplied Q1 autograder command
+`python autograder.py -q q1`, run from `src/`, passed all five tests for 3/3
+local points in the assignment-recommended Python 3.11 `cs188` environment:
+`graph_backtrack`, `graph_bfs_vs_dfs`, `graph_infinite`, `graph_manypaths` and
+`pacman_1`. On `mediumMaze`, the grader reported a 130-step solution and 146
+expanded nodes. The score is provisional and unregistered. An actual output
+screenshot and Q1 explanation are still needed for the report. This records
+repository code and test status only; it does not establish which member
+authored the implementation or complete that member's contribution evidence.
+Q2–Q7 remain unimplemented.
 
 ## Verification and performance
 
@@ -99,7 +115,9 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Implement Q1-Q7 and verify legal paths and required optimality.
+- [ ] Capture the actual Q1 autograder output screenshot and write its explanation.
+- [ ] Implement Q2-Q7 and verify legal paths and required optimality.
+- [ ] Run the supplied autograder for Q2-Q7 and record actual results.
 - [ ] Verify Q5 state representation and corner bookkeeping.
 - [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
   nonnegativity; record expansion counts and runtime.
