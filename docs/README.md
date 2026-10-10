@@ -1,6 +1,7 @@
 # Project documents
 
-**Group:** 2026-AI-45  
+**Group:** 2026-AI-45
+
 **Documentation finalized:** 10 October 2026
 
 The confirmed responsibilities are Adithya Q1/Q3 (8 marks), Ushan Q2/Q5

@@ -1,8 +1,11 @@
 # Report and submission plan
 
-**Group:** 2026-AI-45  
-**Responsibility allocation:** Finalized on 10 October 2026  
-**Planning document:** Finalized  
+**Group:** 2026-AI-45
+
+**Responsibility allocation:** Finalized on 10 October 2026
+
+**Planning document:** Finalized
+
 **Submission report status:** Awaiting implementation and genuine evidence
 
 Use [member-contributions.md](member-contributions.md) as the authoritative

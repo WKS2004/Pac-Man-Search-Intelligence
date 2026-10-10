@@ -1,7 +1,9 @@
 # Finalized member responsibilities
 
-**Project:** Pac-Man Search Intelligence  
-**Group:** 2026-AI-45  
+**Project:** Pac-Man Search Intelligence
+
+**Group:** 2026-AI-45
+
 **Allocation finalized:** 10 October 2026
 
 This is the team's confirmed assignment of responsibilities. It is not a claim

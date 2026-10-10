@@ -1,0 +1,2 @@
+# PDF cross-reference records contain required spaces; treat PDFs as binary.
+*.pdf binary
