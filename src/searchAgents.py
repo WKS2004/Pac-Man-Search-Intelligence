@@ -377,7 +377,32 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    position, visitedCorners = state
+    unvisitedCorners = tuple(
+        corner
+        for corner, visited in zip(corners, visitedCorners)
+        if not visited
+    )
+
+    def shortestRelaxedTour(currentPosition, remainingCorners):
+        if not remainingCorners:
+            return 0
+
+        shortestDistance = float('inf')
+        for index, corner in enumerate(remainingCorners):
+            distance = (
+                abs(currentPosition[0] - corner[0])
+                + abs(currentPosition[1] - corner[1])
+            )
+            remaining = remainingCorners[:index] + remainingCorners[index + 1:]
+            shortestDistance = min(
+                shortestDistance,
+                distance + shortestRelaxedTour(corner, remaining)
+            )
+
+        return shortestDistance
+
+    return shortestRelaxedTour(position, unvisitedCorners)
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
