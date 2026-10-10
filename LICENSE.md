@@ -31,14 +31,18 @@ agreements remain relevant to determining ownership and licensing authority.
 
 ## Contributors
 
-The project contributors are the same team members identified in OCEAVERA:
+The project contributors, in the confirmed Pac-Man member order, are:
 
-| GitHub account | Contributor |
-| --- | --- |
-| [WKS2004](https://github.com/WKS2004) | Wanshaja Sooriyabandara |
-| [sanudaabey](https://github.com/sanudaabey) | Sanuda Abeysinghe |
-| [AdithyaGunawardana](https://github.com/AdithyaGunawardana) | Adithya Gunawardana |
-| [Ushan-Srinuka](https://github.com/Ushan-Srinuka) | Ushan Srinuka |
+| Member | GitHub account | Contributor |
+| --- | --- | --- |
+| 1 | [AdithyaGunawardana](https://github.com/AdithyaGunawardana) | Adithya Gunawardana |
+| 2 | [Ushan-Srinuka](https://github.com/Ushan-Srinuka) | Ushan Srinuka |
+| 3 | [sanudaabey](https://github.com/sanudaabey) | Sanuda Abeysinghe |
+| 4 | [WKS2004](https://github.com/WKS2004) | Wanshaja Sooriyabandara |
+
+See the [member contribution plan](docs/member-contributions.md) for the verified
+permitted identity fields and finalized question responsibilities. This contributor
+list does not claim that assigned implementation work has been completed.
 
 Listing a contributor does not assign ownership of another person's work or
 grant rights in third-party materials.

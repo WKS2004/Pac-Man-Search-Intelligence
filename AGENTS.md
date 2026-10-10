@@ -8,10 +8,20 @@ Read [.agents/routing.md](.agents/routing.md), then the universal
 Use [.agents/repository-map.md](.agents/repository-map.md) for paths.
 Read [.agents/README.md](.agents/README.md) when changing agent resources.
 
+For contribution and report work, use the finalized
+[member responsibility record](docs/member-contributions.md) and
+[report plan](docs/report-submission-plan.md), listed in the
+[document index](docs/README.md). Preserve the confirmed member order and question
+ownership. Carry only names, registration numbers and GitHub usernames
+from member identity sources; exclude other personal or academic information.
+Assigned responsibilities are not evidence of completed work.
+Do not create or update AI usage records in this repository, as requested by the user.
+
 ## Non-negotiable assignment boundaries
 
-- Current authorization covers agent-resource changes only. Source implementation
-  still requires an explicit user request or authorization.
+- Current authorization covers agent resources and requested project/contribution
+  documentation. Source implementation still requires an explicit user request
+  or authorization.
 - After implementation is authorized, the only editable assignment source files
   are the existing `src/search.py` and `src/searchAgents.py`.
 - Every other file anywhere under `src/` is strictly read-only, including

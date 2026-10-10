@@ -6,7 +6,11 @@ Verify current paths and implementation state before relying on this map.
 | --- | --- | --- |
 | `AGENTS.md` | Repository-wide entry and essential restrictions | User-requested instruction work |
 | `.agents/` | Focused rules, routing, skills and resource checks | User-requested agent-resource work |
-| `README.md` | Existing project overview at root | Read-only until a README task is authorized |
+| `README.md` | Project overview, setup and finalized contribution summary | User-requested project documentation |
+| `docs/README.md` | Document index, finalized planning status and evidence prerequisites | User-requested project documentation |
+| `docs/member-contributions.md` | Confirmed identities, Q1-Q7 ownership and supporting roles | User-requested contribution documentation |
+| `docs/report-submission-plan.md` | Report owners, evidence checklist and submission requirements | User-requested report documentation |
+| `output/pdf/Group_2026-AI-45_Contribution_Plan.pdf` | Shareable finalized responsibility plan | User-requested planning artifact; not the submission report |
 | `src/search.py` | Generic DFS, BFS, UCS and A*: Q1-Q4 | Authorized assignment implementation only |
 | `src/searchAgents.py` | Agents/problems, corners and food heuristics: Q5-Q7 | Only requested assignment portions |
 | `src/util.py` | Supplied fringe structures and helpers | Read-only |
@@ -25,8 +29,10 @@ Verify current paths and implementation state before relying on this map.
 - Run Pac-Man/autograder commands from `src/`. Run agent-resource checks from root.
 - The two allowed files form the entire code submission. Other files must not enter
   the ZIP, even if an agent-resource file contains useful implementation guidance.
-- Report/evidence/package locations outside `src/` are chosen only when those
-  artifacts are requested; this map does not claim any report already exists.
+- Contribution and report planning documents are under `docs/`; the contribution
+  plan PDF is under `output/pdf/`. The actual submission report, grading evidence
+  and code ZIP require completed work and separate validation.
+- Repository AI usage records are not created or updated, as requested by the user.
 - Do not freeze starter status or test scores in this map. Inspect current source
   and results for each requested audit.
 

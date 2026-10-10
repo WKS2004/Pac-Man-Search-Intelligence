@@ -19,6 +19,9 @@ Produce or review the requested assignment deliverables.
 - Follow the report-submission and git-ai-usage rules for report content,
   contribution evidence and exact AI prompts. Use a document/PDF skill if
   authoring the final report benefits from its artifact workflow.
+- Respect the user's instruction against repository AI usage records. Do not
+  recreate logs or prompt transcripts during contribution or document work;
+  distinguish the final-report requirement from the scope of the current task.
 - For a requested ZIP, take the two allowed files from `src/`, store them as
   `search.py` and `searchAgents.py` at the archive root, then inspect its members.
   Keep output artifacts outside `src/` and exclude all other project files.

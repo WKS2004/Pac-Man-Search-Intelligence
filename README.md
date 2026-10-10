@@ -14,7 +14,8 @@ Full-score grading is manual while this work is in progress.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
-[GitHub workflows](#github-workflows) · [Contribution and submission](#contribution-and-submission)
+[GitHub workflows](#github-workflows) · [Contribution and submission](#contribution-and-submission) ·
+[Project documents](docs/README.md)
 
 ## Project scope
 
@@ -48,6 +49,8 @@ Pac-Man-Search-Intelligence/
 │   └── pacman-search-intelligence-logo.png
 ├── .agents/                   # Assignment rules, skills and source recovery
 ├── .github/                   # Workflows, source policy and CI helpers
+├── docs/                      # Finalized ownership and report/submission plan
+├── output/pdf/                # Shareable contribution plan
 └── src/                       # Supplied Pac-Man project
     ├── search.py              # Q1–Q4 implementation file
     ├── searchAgents.py        # Q5–Q7 implementation file
@@ -212,6 +215,33 @@ configuration. Manual grading jobs should not be required PR checks.
 
 ## Contribution and submission
 
+The finalized allocation for **2026-AI-45** is:
+
+| Member | Contributor | GitHub username | Questions | PDF marks covered |
+| --- | --- | --- | --- | ---: |
+| 1 | Adithya Gunawardana | `AdithyaGunawardana` | Q1: DFS, Q3: UCS | 8 |
+| 2 | Ushan Srinuka | `Ushan-Srinuka` | Q2: BFS, Q5: CornersProblem | 12 |
+| 3 | Sanuda Abeysinghe | `sanudaabey` | Q4: A*, Q6: Corners heuristic | 12 |
+| 4 | Wanshaja Sooriyabandara | `WKS2004` | Q7: Food heuristic | 8 |
+
+These are assigned responsibilities, not completed-work claims or individual
+grades. The [member contribution plan](docs/member-contributions.md) records
+verified registration numbers and formal name spellings, handoffs and supporting
+roles. It is the authoritative ownership record for this project.
+
+Adithya coordinates integration and final verification; Ushan coordinates report
+assembly; Sanuda coordinates A* and corner-heuristic integration; Wanshaja
+coordinates food performance evidence and Git evidence collection.
+Everyone tests and explains their questions and prepares for the
+whole-solution viva.
+
+See the [report and submission plan](docs/report-submission-plan.md) and
+[shareable contribution plan](output/pdf/Group_2026-AI-45_Contribution_Plan.pdf).
+The allocation is finalized; the submission report still requires implementation
+and genuine grading/contribution evidence.
+The [document index](docs/README.md) identifies each document's purpose and status.
+Repository AI usage records are not created or maintained, as requested by the user.
+
 Use entirely lowercase branch names, for example `feature/q1-dfs`,
 `fix/corners-heuristic` or `docs/readme`. Keep changes focused and record meaningful
 commits that reflect each contributor's actual work. Include the tested question,
@@ -223,8 +253,8 @@ used. Each member should understand the full solution for individual evaluation.
 
 The submission consists of two separate items:
 
-- `Group_<ID>_Report.pdf` — the group report, using the actual group ID.
-- `Group_<ID>_Code.zip` — only `search.py` and `searchAgents.py` at the ZIP root,
+- `Group_2026-AI-45_Report.pdf` — the completed group report.
+- `Group_2026-AI-45_Code.zip` — only `search.py` and `searchAgents.py` at the ZIP root,
   taken from `src/`; no framework, tests, layouts or repository documentation.
 
 Consult the Project Guidelines PDF and the

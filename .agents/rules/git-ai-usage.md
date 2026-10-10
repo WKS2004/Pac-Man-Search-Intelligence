@@ -11,10 +11,16 @@
   or local packaging alone does not authorize them.
 - Do not assign another team member's identity to agent work or infer identities
   from an unrelated reference project.
+- Use [the user-confirmed Pac-Man identity and responsibility record](../../docs/member-contributions.md).
+  The user authorized names, registration numbers and GitHub usernames from
+  OCEAVERA for identity verification only. Do not inherit its member numbering,
+  work assignments, other personal data or academic information.
 
 ## AI declaration
 
 - The report must name AI tools used and include the exact prompts.
+- The user has requested no repository AI usage records. Do not create or update
+  such records. Preserve the assignment's final-report disclosure requirements.
 - Analysis, understanding, idea generation and instruction-resource work are AI
   assistance, as is generated code. Do not claim no AI was used for this work.
 - Preserve exact user prompts when recording authorized evidence; do not substitute

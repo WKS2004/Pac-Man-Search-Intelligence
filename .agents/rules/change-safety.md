@@ -4,11 +4,13 @@
 
 - Follow the user's instructions and the assignment-specific requirements in the
   Project Guidelines PDF. Do not silently resolve conflicting requirements.
-- The user initially authorized read-only analysis. The subsequent request to
-  implement these rules authorizes repository instruction files only. It does
-  **not** authorize implementing algorithms or modifying assignment source files.
+- The user authorized repository instructions and later requested project,
+  contribution and report-planning documentation. This authorizes the relevant
+  documentation work, including README alignment, but **not** implementing
+  algorithms or modifying assignment source files.
 - Until the user explicitly authorizes source implementation, treat every file
-  under `src/` and the existing `README.md` as read-only.
+  under `src/` as read-only. Documentation changes require a relevant user task;
+  source permission does not substitute for documentation authorization.
 - After implementation is authorized, apply the source edit allowlist below.
   A request to implement or fix the assignment is not permission to edit the
   supplied framework, tests, layouts, or grading configuration.

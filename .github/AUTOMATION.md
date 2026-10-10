@@ -7,6 +7,11 @@ This guide is named `AUTOMATION.md` because GitHub prioritizes a README in
 `.github/` over the repository's root README. Keep the project overview and logo
 in the root [README.md](../README.md).
 
+Question ownership, supporting roles and the confirmed member order are recorded
+in [the member contribution plan](../docs/member-contributions.md). Workflow
+results support that plan's evidence requirements; a workflow run does not assign
+authorship or establish an individual's contribution by itself.
+
 ```text
 .github/
   AUTOMATION.md

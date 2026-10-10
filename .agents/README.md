@@ -91,3 +91,11 @@ The assignment requirements and agent workflow safeguards are distinguished in
 [assignment.md](rules/assignment.md). Current source permission is recorded in
 [change-safety.md](rules/change-safety.md); creating this resource structure does
 not authorize implementation.
+
+For confirmed ownership and permitted identity fields, use the project's
+[member contribution plan](../docs/member-contributions.md). Report preparation
+uses [the submission plan](../docs/report-submission-plan.md). These documents
+record responsibilities and known evidence requirements; they do not prove
+completed implementation. See the
+[document index](../docs/README.md) for their finalized planning status.
+Repository AI usage records are not created or updated, as requested by the user.
