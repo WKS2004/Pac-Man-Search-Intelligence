@@ -496,7 +496,48 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    foodPositions = foodGrid.asList()
+    if not foodPositions:
+        return 0
+
+    nearestFoodDistance = min(
+        abs(position[0] - food[0]) + abs(position[1] - food[1])
+        for food in foodPositions
+    )
+
+    if 'foodMSTCache' not in problem.heuristicInfo:
+        problem.heuristicInfo['foodMSTCache'] = {}
+
+    mstCache = problem.heuristicInfo['foodMSTCache']
+    foodKey = tuple(sorted(foodPositions))
+    if foodKey not in mstCache:
+        remainingFoods = set(foodPositions)
+        firstFood = foodPositions[0]
+        connectedFoods = {firstFood}
+        remainingFoods.remove(firstFood)
+        mstCost = 0
+
+        while remainingFoods:
+            shortestDistance = float('inf')
+            nextFood = None
+
+            for connectedFood in connectedFoods:
+                for candidateFood in remainingFoods:
+                    distance = (
+                        abs(connectedFood[0] - candidateFood[0])
+                        + abs(connectedFood[1] - candidateFood[1])
+                    )
+                    if distance < shortestDistance:
+                        shortestDistance = distance
+                        nextFood = candidateFood
+
+            connectedFoods.add(nextFood)
+            remainingFoods.remove(nextFood)
+            mstCost += shortestDistance
+
+        mstCache[foodKey] = mstCost
+
+    return nearestFoodDistance + mstCache[foodKey]
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
