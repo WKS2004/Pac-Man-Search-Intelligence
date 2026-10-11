@@ -6,11 +6,17 @@
 
 **Planning document:** Finalized
 
-**Submission report status:** Awaiting implementation and genuine evidence
+**Submission report status:** Q1–Q6 each report 3/3 and Q7 reports 4/4
+provisional points. All Q1–Q7 autograder runs used the Conda environment named
+`cs188`, created exactly as specified in the Project Guidelines with Python
+3.11. Q7's `trickySearch` expansion count is 7,137, within the PDF's 9,000-node
+target and above the grader's additional 7,000-node threshold. Report evidence
+for all question sections is incomplete.
 
 Use [member-contributions.md](member-contributions.md) as the authoritative
 identity and responsibility record. Assigned work must not be described as
 completed work until it is supported by evidence.
+
 Ushan coordinates report assembly and Adithya coordinates final verification.
 Each question owner supplies their explanation and actual grading evidence;
 Wanshaja coordinates food benchmark and Git evidence collection.
@@ -33,18 +39,147 @@ questions. The supplied PDF states no submission deadline.
 
 | Report section | Owner | Required function or block | Evidence still needed |
 | --- | --- | --- | --- |
-| Q1 | Adithya | `depthFirstSearch` | Actual implementation, q1 screenshot and explanation |
-| Q2 | Ushan | `breadthFirstSearch` | Actual implementation, q2 screenshot and explanation |
-| Q3 | Adithya | `uniformCostSearch` | Actual implementation, q3 screenshot and explanation |
-| Q4 | Sanuda | `aStarSearch` | Actual implementation, q4 screenshot and explanation |
-| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Actual implementation, q5 screenshot and explanation |
-| Q6 | Sanuda | `cornersHeuristic` | Actual implementation, q6 screenshot, correctness argument and expansion count |
-| Q7 | Wanshaja | `foodHeuristic` | Actual implementation, q7 screenshot, correctness argument and expansion count |
+| Q1 | Adithya | `depthFirstSearch` | Grader reports provisional 3/3 in the Conda `cs188` environment specified by the Project Guidelines, using Python 3.11; explanation draft appears below. Owner review, screenshot and actual contribution evidence are still needed |
+| Q2 | Ushan | `breadthFirstSearch` | Supplied grader output reports provisional 3/3 across all five tests; `mediumMaze` path length 68, 269 expanded nodes. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q3 | Adithya | `uniformCostSearch` | Supplied grader output reports provisional 3/3 across all ten tests; `mediumMaze` path/expansion pairs are 68/269, 74/260 and 152/173, and `testSearch` is 7/14. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q4 | Sanuda | `aStarSearch` | Supplied `python autograder.py -q q4` output reports provisional 3/3 across all six tests; `mediumMaze` path length 68, 221 expanded nodes. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q5 | Ushan | `CornersProblem` start, goal and successor methods | Supplied q5 output reports the Q2 dependency and Q5 each passing for provisional 3/3; `tinyCorner` solution length 28. Run in Conda `cs188` with Python 3.11. Explanation draft appears below; owner review, screenshot and actual contribution evidence are still needed |
+| Q6 | Sanuda | `cornersHeuristic` | Supplied q6 output reports provisional 3/3; Q4 dependency also reports 3/3. `mediumCorners` path length 106, 741 expanded nodes (within the 1,200-node target). Run in Conda `cs188` with Python 3.11. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed |
+| Q7 | Wanshaja | `foodHeuristic` | Supplied q7 output reports provisional 4/4; Q4 dependency also reports 3/3. All 17 heuristic checks pass. `trickySearch` expands 7,137 nodes: within the PDF's 9,000-node target but above the grader's additional 7,000-node threshold. Run in Conda `cs188` with Python 3.11. Explanation draft appears below. Owner review, screenshot, runtime and actual contribution evidence are still needed |
 
 Each question section must identify the edited functions/code blocks, include a
 clear screenshot of actual autograder output and explain the logic, data
 structures and heuristic design in **at most 200 words**. Do not write invented
 implementation descriptions or present performance targets as achieved results.
+
+## Current implementation status
+
+`src/search.py` contains a Q1 `depthFirstSearch` implementation using
+`util.Stack` and a visited-state set. The supplied Q1 autograder command
+`python autograder.py -q q1`, run from `src/`, passed all five tests for 3/3
+local points in the assignment-recommended Python 3.11 `cs188` environment:
+`graph_backtrack`, `graph_bfs_vs_dfs`, `graph_infinite`, `graph_manypaths` and
+`pacman_1`. On `mediumMaze`, the grader reported a 130-step solution and 146
+expanded nodes.
+
+**Q1 explanation draft for owner review (under 200 words):** Depth-first
+search puts the start state and an empty action path in the supplied
+`util.Stack`. It removes the most recently added entry, so it follows one path
+deeper before exploring earlier alternatives. When a goal is reached, it
+returns the actions stored with that state. A visited-state set prevents the
+algorithm from expanding the same state repeatedly; each newly expanded state
+adds its unvisited successors with the corresponding action appended. If the
+stack empties without finding a goal, it returns an empty path. Because this
+search follows depth-first order, it does not guarantee the fewest-move path.
+
+The supplied Q2 output for `python autograder.py -q q2` reports all five tests
+passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
+`graph_infinite`, `graph_manypaths` and `pacman_1`. On `mediumMaze`, it reports
+a 68-step solution and 269 expanded nodes. Both scores are provisional and
+unregistered.
+
+**Q2 explanation draft for owner review (under 200 words):** Breadth-first
+search places the start state and an empty action path in the supplied
+`util.Queue`. It removes entries in FIFO order, so paths are expanded in
+nondecreasing number of moves. When a goal state is removed, its action path is
+returned. The algorithm skips states already expanded, records each newly
+expanded state, and queues its unvisited successors with the corresponding
+action appended. When every move has equal cost, this ordering makes the first
+goal path a shortest path in number of moves. The implementation does not use
+`stepCost`, so it does not guarantee minimum total cost when move costs differ.
+If the queue empties before a goal is found, it returns an empty path.
+
+The supplied Q3 output for `python autograder.py -q q3` reports all ten tests
+passing for 3/3 local points: `graph_backtrack`, `graph_bfs_vs_dfs`,
+`graph_infinite`, `graph_manypaths`, `ucs_0_graph`, `ucs_1_problemC`,
+`ucs_2_problemE`, `ucs_3_problemW`, `ucs_4_testSearch` and
+`ucs_5_goalAtDequeue`. The three `mediumMaze` cases report solution lengths
+and expansions of 68/269, 74/260 and 152/173; `testSearch` reports 7/14. The
+score is provisional and unregistered.
+
+**Q3 explanation draft for owner review (under 200 words):** Uniform-cost
+search puts the start state, an empty action path and cost zero in the supplied
+`util.PriorityQueue`. Each entry is removed in order of lowest accumulated
+cost. The algorithm skips states already expanded, marks a newly removed state
+visited, and returns its action path if it is a goal. Otherwise, it adds each
+unvisited successor's `stepCost` to the current cost, appends the successor's
+action to the path, and queues the resulting entry with its cumulative cost as
+priority. Assuming nonnegative step costs, the first goal removed has minimum
+total path cost. If the queue empties before a goal is found, it returns an
+empty path.
+
+The supplied Q4 output for `python autograder.py -q q4` reports all six tests
+passing for 3/3 local points: `astar_0`, `astar_1_graph_heuristic`,
+`astar_2_manhattan`, `astar_3_goalAtDequeue`, `graph_backtrack` and
+`graph_manypaths`. On `mediumMaze`, it reports a 68-step path and 221 expanded
+nodes. The score is provisional and unregistered.
+
+**Q4 explanation draft for owner review (under 200 words):** A* puts the start
+state, an empty action path and cost zero in the supplied `util.PriorityQueue`,
+with priority `g + h`. It removes the lowest-priority entry, skips it if its
+path cost is no longer the best known for that state, and returns its action
+path if it is a goal. For each successor, it adds `stepCost` to `g` and queues
+the successor only when the resulting cost improves the best known cost, using
+the new cost plus the supplied heuristic as priority. This skips stale entries
+and allows a cheaper path to reopen a state. With an admissible heuristic that
+is zero at goals and nonnegative step costs, A* returns a minimum-cost path. If
+the queue empties first, it returns an empty path.
+
+The supplied output for `python autograder.py -q q5` runs dependency Q2 and Q5.
+All five Q2 tests pass for 3/3, with a 68-step `mediumMaze` path and 269
+expanded nodes. The Q5 `corner_tiny_corner` test passes for 3/3 with a 28-step
+solution on `tinyCorner`. Both scores are provisional and unregistered.
+
+**Q5 explanation draft for owner review (under 200 words):** `CornersProblem`
+represents a state as Pac-Man's position paired with a tuple of four booleans,
+one per corner. The start state marks a corner visited if Pac-Man begins there.
+For each legal move, the successor records the new position and updates the
+tuple so visited corners stay marked and a corner at the new position becomes
+visited. Each move costs one. A state is a goal when all four tuple entries are
+true. This compact, hashable state lets graph search distinguish reaching the
+same position with different remaining corners, while `_expanded` counts each
+successor expansion as required by the supplied framework.
+
+The supplied output for `python autograder.py -q q6` runs dependency Q4 and Q6.
+All six Q4 tests pass for 3/3. Q6's three heuristic sanity checks pass, and its
+`mediumCorners` run reports a 106-step solution with 741 expanded nodes, below
+the PDF's 1,200-node full-credit expansion threshold. Both scores are
+provisional and unregistered.
+
+**Q6 explanation draft for owner review (under 200 words):** The heuristic
+considers every order of the unvisited corners and returns the smallest sum of
+Manhattan distances from Pac-Man's position through that order. Manhattan
+distance ignores walls, so each leg is no longer than the corresponding maze
+path. Every possible corner order is considered, so the minimum relaxed tour
+cannot exceed the true route cost. The Manhattan triangle inequality keeps the
+estimate consistent across a one-step move; when that move visits a corner,
+the step accounts for removing that corner from the remaining set. The value is
+nonnegative and is zero when all corners have been visited.
+
+The supplied output for `python autograder.py -q q7` runs dependency Q4 and Q7.
+All six Q4 tests pass for 3/3. All 17 Q7 food-heuristic checks pass. The
+`trickySearch` expansion check reports 7,137 nodes and displays `FAIL` because
+it exceeds the supplied grader's additional 7,000-node threshold. This remains
+below the PDF's 9,000-node full-credit target, and the overall Q7 score is 4/4.
+Both scores are provisional and unregistered.
+
+**Q7 explanation draft for owner review (under 200 words):** `foodHeuristic`
+returns zero when no food remains. Otherwise, it adds the Manhattan distance
+from Pac-Man to the nearest dot to a minimum spanning tree over all remaining
+dots, using Manhattan distances for the tree edges. The heuristic caches each
+tree cost by the sorted set of food positions. Any collection route must travel
+at least as far as its first dot, then connect all remaining food; that latter
+part costs at least the food MST. Manhattan distance ignores walls and cannot
+exceed maze distance, so the sum is an admissible lower bound. A move without
+eating food changes the nearest-distance term by at most one. If a move eats a
+dot, its one step reaches that dot, and the successor's nearest-food distance
+covers the cheapest edge connecting the dot to the reduced MST. This makes the
+estimate consistent. It is nonnegative and zero when no food remains.
+
+The Q1–Q7 output screenshots, owner review of the Q1–Q7 explanation drafts, and
+genuine contribution evidence remain needed for the report. This records
+repository code and test status only; it does not establish which member
+authored any implementation or complete that member's contribution evidence.
 
 ## Verification and performance
 
@@ -99,11 +234,13 @@ maintaining such records.
 
 ## Final readiness checklist
 
-- [ ] Implement Q1-Q7 and verify legal paths and required optimality.
+- [ ] Capture the actual Q1, Q2, Q3, Q4, Q5, Q6 and Q7 autograder output screenshots.
+- [ ] Have the Q1–Q7 owners review and finalize their explanation drafts in
+  Current implementation status.
 - [ ] Verify Q5 state representation and corner bookkeeping.
-- [ ] Explain and verify Q6/Q7 admissibility, consistency, goal behavior and
-  nonnegativity; record expansion counts and runtime.
-- [ ] Capture actual results for all seven question sections.
+- [ ] Have the Q6/Q7 owners review their admissibility and consistency
+  explanations; record Q6/Q7 runtime evidence.
+- [x] Record the supplied autograder results for all seven question sections.
 - [ ] Check word limits, formatting, screenshot clarity and identity consistency.
 - [ ] Reconcile final contributions with actual Git evidence.
 - [ ] Complete all AI disclosures, including assistance outside this chat.
@@ -112,8 +249,8 @@ maintaining such records.
 - [ ] Complete a timed team viva rehearsal with questions for every member.
 - [ ] Verify source integrity and inspect the final ZIP contents.
 
-The allocation and planning documents are finalized. This checklist deliberately
-remains open until the underlying implementation and evidence are complete.
+The allocation and planning documents are finalized. This checklist remains
+open until the outstanding report evidence and final-submission steps are complete.
 
 ## Submission files
 

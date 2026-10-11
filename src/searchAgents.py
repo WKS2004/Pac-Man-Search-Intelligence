@@ -296,14 +296,17 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        position = self.startingPosition
+        visitedCorners = tuple(position == corner for corner in self.corners)
+        return (position, visitedCorners)
 
     def isGoalState(self, state: Any):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        position, visitedCorners = state
+        return all(visitedCorners)
 
     def getSuccessors(self, state: Any):
         """
@@ -317,6 +320,8 @@ class CornersProblem(search.SearchProblem):
         """
 
         successors = []
+        position, visitedCorners = state
+        x, y = position
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
             # Here's a code snippet for figuring out whether a new position hits a wall:
@@ -326,6 +331,17 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+
+            if not self.walls[nextx][nexty]:
+                nextPosition = (nextx, nexty)
+                nextVisitedCorners = tuple(
+                    alreadyVisited or nextPosition == corner
+                    for corner, alreadyVisited in zip(self.corners, visitedCorners)
+                )
+                nextState = (nextPosition, nextVisitedCorners)
+                successors.append((nextState, action, 1))
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
@@ -361,7 +377,32 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    position, visitedCorners = state
+    unvisitedCorners = tuple(
+        corner
+        for corner, visited in zip(corners, visitedCorners)
+        if not visited
+    )
+
+    def shortestRelaxedTour(currentPosition, remainingCorners):
+        if not remainingCorners:
+            return 0
+
+        shortestDistance = float('inf')
+        for index, corner in enumerate(remainingCorners):
+            distance = (
+                abs(currentPosition[0] - corner[0])
+                + abs(currentPosition[1] - corner[1])
+            )
+            remaining = remainingCorners[:index] + remainingCorners[index + 1:]
+            shortestDistance = min(
+                shortestDistance,
+                distance + shortestRelaxedTour(corner, remaining)
+            )
+
+        return shortestDistance
+
+    return shortestRelaxedTour(position, unvisitedCorners)
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
@@ -455,7 +496,48 @@ def foodHeuristic(state: Tuple[Tuple, List[List]], problem: FoodSearchProblem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    foodPositions = foodGrid.asList()
+    if not foodPositions:
+        return 0
+
+    nearestFoodDistance = min(
+        abs(position[0] - food[0]) + abs(position[1] - food[1])
+        for food in foodPositions
+    )
+
+    if 'foodMSTCache' not in problem.heuristicInfo:
+        problem.heuristicInfo['foodMSTCache'] = {}
+
+    mstCache = problem.heuristicInfo['foodMSTCache']
+    foodKey = tuple(sorted(foodPositions))
+    if foodKey not in mstCache:
+        remainingFoods = set(foodPositions)
+        firstFood = foodPositions[0]
+        connectedFoods = {firstFood}
+        remainingFoods.remove(firstFood)
+        mstCost = 0
+
+        while remainingFoods:
+            shortestDistance = float('inf')
+            nextFood = None
+
+            for connectedFood in connectedFoods:
+                for candidateFood in remainingFoods:
+                    distance = (
+                        abs(connectedFood[0] - candidateFood[0])
+                        + abs(connectedFood[1] - candidateFood[1])
+                    )
+                    if distance < shortestDistance:
+                        shortestDistance = distance
+                        nextFood = candidateFood
+
+            connectedFoods.add(nextFood)
+            remainingFoods.remove(nextFood)
+            mstCost += shortestDistance
+
+        mstCache[foodKey] = mstCost
+
+    return nearestFoodDistance + mstCache[foodKey]
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"

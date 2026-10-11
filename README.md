@@ -7,10 +7,55 @@ supplied UC Berkeley Pac-Man framework. The project explores depth-first search,
 breadth-first search, uniform-cost search and A*, then applies search states and
 heuristics to visiting all four corners and collecting food.
 
-**Development status:** the current source still contains the Q1–Q7 starter
-implementations. The generic search functions and corner state methods need
-implementation, and the supplied corner and food heuristics are placeholders.
-Full-score grading is manual while this work is in progress.
+**Development status:** Q1's `depthFirstSearch`, Q2's `breadthFirstSearch`,
+Q3's `uniformCostSearch`, and Q4's `aStarSearch` in `src/search.py`, plus Q5's
+`CornersProblem` and Q6's `cornersHeuristic` in `src/searchAgents.py` pass their
+supplied tests for 3/3 local points each. Q7's `foodHeuristic` reports 4/4
+provisional local points. All Q1–Q7 autograder runs used the Conda environment
+named `cs188`, created exactly as specified in the Project Guidelines with
+Python 3.11. Q1 returned a 130-step `mediumMaze` path with 146 expanded nodes.
+The supplied Q2 output reports a 68-step path and 269 expanded nodes on
+`mediumMaze`. Q3 reports `mediumMaze` paths of 68, 74 and 152 steps, with 269,
+260 and 173 expanded nodes, and a 7-step `testSearch` path with 14 expanded
+nodes. Q4 reports a 68-step `mediumMaze` path with 221 expanded nodes. Q5 passes
+its `tinyCorner` test with a 28-step solution and its five-test Q2 dependency.
+Q6 passes three heuristic sanity checks and reports a 106-step `mediumCorners`
+solution with 741 expanded nodes; its run also passes the six-test Q4
+dependency. Q7's 17 food
+heuristic checks pass; its `trickySearch` expansion result is 7,137 nodes, below
+the PDF's 9,000-node target but above the supplied grader's additional 7,000-node
+threshold. All seven question scores are provisional and unregistered.
+
+Q1's depth-first search uses the supplied LIFO `util.Stack` and stores each
+state with its action path. It pops the latest entry, returns its path at the
+goal, skips previously expanded states, and pushes unvisited successors. This
+explores deeper paths first but does not guarantee a fewest-move solution.
+
+Q2's breadth-first search uses the supplied FIFO `util.Queue` to expand
+shallowest paths first. With equal step costs, it returns a path with the fewest
+moves; it does not optimize total cost when step costs differ.
+
+Q3's uniform-cost search uses the supplied `util.PriorityQueue` ordered by
+accumulated path cost. Assuming nonnegative step costs, the first goal removed
+from the queue has minimum total cost.
+
+Q4's A* search uses the supplied `util.PriorityQueue` ordered by `g + h`, where
+`g` is the cost so far and `h` is the supplied heuristic. It tracks the best
+known cost for each state and skips stale queue entries.
+
+Q5's `CornersProblem` state pairs Pac-Man's position with a tuple recording
+which corners have been visited. Legal successors preserve that history and
+cost one; the goal is reached when all four corners are marked.
+
+Q6's `cornersHeuristic` evaluates every order of the unvisited corners and
+returns the minimum Manhattan-distance tour. Manhattan distance ignores walls,
+so each leg is a lower bound on maze distance; minimizing over every order
+avoids an arbitrary greedy route.
+
+Q7's `foodHeuristic` adds the Manhattan distance to the nearest remaining dot
+to a Manhattan minimum spanning tree over all remaining dots. It caches the
+tree cost by food-position set. Since Manhattan distance ignores walls, these
+distances provide an admissible and consistent lower bound on the food tour.
 
 [Getting started](#getting-started) · [Search examples](#search-examples) ·
 [Testing](#testing) · [Source boundaries](#source-boundaries) ·
@@ -106,8 +151,13 @@ Keyboard control requires graphics; it cannot be combined with text-only play.
 
 ## Search examples
 
-Run these from `src/` **after implementing the corresponding questions**. They
-are usage examples, not claims that the current starter passes them.
+Run these from `src/`. The supplied Q1–Q6 autograder outputs report provisional
+3/3 each, and Q7 reports 4/4 provisional points. All Q1–Q7 runs used the Conda
+environment named `cs188`, created exactly as specified in the Project
+Guidelines with Python 3.11. Q6 reports a 106-step `mediumCorners` solution
+and 741 expanded nodes. Q7 reports 7,137 expanded
+nodes on `trickySearch`, meeting the PDF's 9,000-node target but missing the
+grader's additional 7,000-node threshold.
 
 ```sh
 # Q1: depth-first search
@@ -195,12 +245,11 @@ describes the available rules and skills.
 | [Branch Name Policy](.github/workflows/branch-policy.yml) | Branch creation, pushes, PR updates or manual audit | Reject uppercase branch names and attempt to delete invalid branches in this repository |
 | [Protected Source Policy](.github/workflows/protected-source.yml) | A PR targeting `main` is opened, reopened or updated | Automatically close PRs whose current source tree violates the source boundary |
 | [Repository Checks](.github/workflows/repository-ci.yml) | Pushes, PRs or manual runs | Check source integrity, syntax, agent resources, CI helpers and workflow definitions |
-| [Pac-Man Search Tests](.github/workflows/search-tests.yml) | Manual runs only | Grade Q1–Q7 on Python 3.9, 3.10 and 3.11 and upload diagnostic artifacts |
+| [Pac-Man Search Tests](.github/workflows/search-tests.yml) | All branch pushes, pull requests, manual runs | Grade Q1–Q7 on Python 3.9, 3.10 and 3.11 and upload diagnostic artifacts |
 
-Search grading is one workflow with three Python-version jobs. Run it through
-**Actions → Pac-Man Search Tests → Run workflow** and choose the branch to grade.
-Incomplete implementations still fail manual grading; routine pushes do not
-trigger it while the assignment is in progress.
+Search grading runs automatically on branch pushes and pull requests. It is one
+workflow with three Python-version jobs; manual runs remain available through
+**Actions → Pac-Man Search Tests → Run workflow**.
 
 Protected Source Policy compares the PR's current source tree with a fixed
 reviewed baseline. It rejects protected content edits, additions, deletions,
@@ -211,7 +260,8 @@ to close; preventing direct pushes requires GitHub branch protection.
 These workflows depend on GitHub Actions permissions. Fork branch deletion and
 protected branch deletion have platform limits. See the
 [automation guide](.github/AUTOMATION.md) for enforcement details and required-check
-configuration. Manual grading jobs should not be required PR checks.
+configuration. This workflow change does not alter GitHub's branch-protection or
+required-check settings.
 
 ## Contribution and submission
 
@@ -237,8 +287,17 @@ whole-solution viva.
 
 See the [report and submission plan](docs/report-submission-plan.md) and
 [shareable contribution plan](output/pdf/Group_2026-AI-45_Contribution_Plan.pdf).
-The allocation is finalized; the submission report still requires implementation
-and genuine grading/contribution evidence.
+The allocation is finalized. Q1 and Q2 each pass all five supplied tests, Q3
+passes all ten, Q4 passes all six, Q5 passes with its Q2 dependency, and Q6
+passes with its Q4 dependency; each reports 3/3 provisional local points. Q5's
+`tinyCorner` solution is 28 steps. Q6's `mediumCorners` solution is 106 steps
+with 741 expanded nodes. Q7 reports 4/4 provisional points; its 17 food
+heuristic checks pass, and its `trickySearch` expansion count is 7,137. This is
+within the PDF's 9,000-node target and above the grader's additional 7,000-node
+threshold. All Q1–Q7 runs used the Conda environment named `cs188`, created
+exactly as specified in the Project Guidelines with Python 3.11. Screenshots,
+owner review of the Q1–Q7 explanation drafts, and genuine contribution evidence
+remain outstanding for the report.
 The [document index](docs/README.md) identifies each document's purpose and status.
 Repository AI usage records are not created or maintained, as requested by the user.
 
